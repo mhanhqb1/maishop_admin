@@ -68,7 +68,7 @@ class AppController extends Controller
                 return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
             }
         }
-        parent::beforeFilter();
+        parent::beforeFilter($event);
 
         // Set common param
         $this->controller = strtolower($this->request->params['controller']);
@@ -89,6 +89,6 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
         
-        $this->viewBuilder()->layout('campus');
+        $this->viewBuilder()->layout('maishop');
     }
 }
