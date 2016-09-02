@@ -1,0 +1,4 @@
+config/development/
+tmp/
+logs/
+cache/
