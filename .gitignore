@@ -2,3 +2,5 @@ config/development/
 tmp/
 logs/
 cache/
+/nbproject/private/
+nbproject/
