@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\Core\Configure;
+use Cake\I18n\I18n;
 
 /**
  * Application Controller
@@ -50,6 +51,9 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Cookie');
+        $lang = $this->getCurrentLanguage();
+        I18n::locale($lang);
     }
 
     /**
@@ -90,5 +94,21 @@ class AppController extends Controller
         }
         
         $this->viewBuilder()->layout('maishop');
+    }
+    
+    /**
+     * get current language
+     *
+     * @param none.
+     * @return string
+     */
+    public function getCurrentLanguage() {
+        if (isset($this->request->query['lang'])) {
+            $language = $this->request->query['lang'];
+        } else {
+            $language = $this->Cookie->read(COOKIE_LANGUAGE);
+        }
+        $this->Cookie->write(COOKIE_LANGUAGE, $language);
+        return $language;
     }
 }

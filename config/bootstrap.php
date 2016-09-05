@@ -106,7 +106,7 @@ if (!Configure::read('debug')) {
  * Set server timezone to UTC. You can change it to another timezone of your
  * choice but using UTC makes time calculations / conversions easier.
  */
-date_default_timezone_set('Asia/Tokyo');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 /**
  * Configure the mbstring extension to use the correct encoding.
@@ -230,6 +230,11 @@ include_once ('apiurl.php');
 
 Configure::write('Config.HTTPS', false);
 Configure::write('Config.SupportPC', false);
+Configure::write('Config.language', 'vi');
+Configure::write('Config.language_type', array(
+    1 => 'vi',
+    2 => 'en'
+));
 
 if ($env == 'production') {
     include_once ('production/bootstrap.php');
@@ -237,6 +242,7 @@ if ($env == 'production') {
     include_once ('development/bootstrap.php');
 }
 
-define('DEFAULT_SITE_TITLE', 'Campus AN');
+define('DEFAULT_SITE_TITLE', 'Mai Shop');
 define('VERSION_DATE', date('Ymd'));
 define('BASE_URL', Router::fullBaseUrl());
+define('COOKIE_LANGUAGE', 'maishop.admin.cookie.language');
