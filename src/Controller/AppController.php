@@ -52,8 +52,11 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Cookie');
-        $lang = $this->getCurrentLanguage();
+        $this->loadComponent('SimpleForm');
+        list($lang, $languageType) = $this->getCurrentLanguage();
         I18n::locale($lang);
+        $this->set('lang', $lang);
+        Configure::write('Config.LanguageType', $languageType);
     }
 
     /**
@@ -106,9 +109,29 @@ class AppController extends Controller
         if (isset($this->request->query['lang'])) {
             $language = $this->request->query['lang'];
         } else {
-            $language = $this->Cookie->read(COOKIE_LANGUAGE);
+            if ($this->Cookie->check(COOKIE_LANGUAGE)) {
+                $language = $this->Cookie->read(COOKIE_LANGUAGE);
+            } else {
+                $language = 'vi';
+            }
         }
+        list($language, $languageType) = $this->validateLang($language);
         $this->Cookie->write(COOKIE_LANGUAGE, $language);
-        return $language;
+        return array($language, $languageType);
+    }
+    
+    /**
+     * Check valid language
+     * @param string $language
+     * @param int return 2 or 3 digit
+     * @return string
+     */
+    protected function validateLang($lang) {
+        $languages = Configure::read('Config.Languages');
+        $data = array('vi', 1);
+        if (array_key_exists($lang, $languages)) {
+            $data = array($lang, $languages[$lang]);
+        }
+        return $data;
     }
 }

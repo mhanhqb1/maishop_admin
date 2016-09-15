@@ -11,9 +11,7 @@ use Cake\Core\Configure;
 class DashboardController extends AppController {
     
     public function index() {
-        echo __('LABEL_HELLO');
-        exit;
-        $this->set('pageHeader', 'Dashboard');
+        $this->set('pageHeader', __('LABEL_HELLO'));
     }
     
 }

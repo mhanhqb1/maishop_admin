@@ -246,3 +246,8 @@ define('DEFAULT_SITE_TITLE', 'Mai Shop');
 define('VERSION_DATE', date('Ymd'));
 define('BASE_URL', Router::fullBaseUrl());
 define('COOKIE_LANGUAGE', 'maishop.admin.cookie.language');
+Configure::write('Config.LanguageType', 1);
+Configure::write('Config.Languages', array(
+    'vi' => 1,
+    'en' => 2
+));
