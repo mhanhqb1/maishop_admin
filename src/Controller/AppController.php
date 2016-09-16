@@ -52,6 +52,7 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Cookie');
+        $this->loadComponent('Common');
         $this->loadComponent('Breadcrumb');
         $this->loadComponent('SimpleForm');
         $this->loadComponent('SearchForm');

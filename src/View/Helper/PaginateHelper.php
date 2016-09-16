@@ -39,7 +39,7 @@ class PaginateHelper extends AppHelper {
                     }
                 }
             }
-            $url = $this->Html->Url('/' . $this->request->url) . '?';
+            $url = BASE_URL . '/' . $this->request->url . '?';
             if (!empty($param)) {
                 $url = $url . implode('&', $param) . '&';
             }            
@@ -89,7 +89,7 @@ class PaginateHelper extends AppHelper {
         
         $html .= '</ul>';
         if ($total > $limit) {
-            $sumary = __('Showing %s to %s of %s entries', ($page - 1) * $limit + 1, min($page * $limit, $total), $total);
+            $sumary = 'Showing '.(($page - 1) * $limit + 1).' to '.min($page * $limit, $total).' of '.$total.' entries';
             $html .= "<div class=\"paging_sumary\">{$sumary}</div>";
         }
         $html .= '</div>';

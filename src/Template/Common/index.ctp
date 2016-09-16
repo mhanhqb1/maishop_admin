@@ -7,12 +7,21 @@
                 <button class="btn btn-primary btn-xs search-collapse" data-widget="collapse"><i class="fa fa-plus"></i></button>
             </div>
             </div>  
-            <div class="box-body search-body">                 
+            <div class="box-body search-body" style="display: none">
                 <?php    
                     echo $this->SimpleForm->render($searchForm);            
-                ?>  
-                sadasda
+                ?>
             </div>   
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">       
+        <div class="box">
+        <?php        
+            echo $this->SimpleTable->render($table);
+            echo $this->Paginate->render($total, $limit);   
+        ?>
         </div>
     </div>
 </div>

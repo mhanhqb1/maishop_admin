@@ -75,7 +75,7 @@ class Api {
             }
             $posts['api_auth_date'] = strtotime(gmdate("M d Y H:i:s", strtotime(date('Y/m/d H:i:s'))));
             $posts['api_auth_key'] = hash('md5', Configure::read('API.secretKey') . $posts['api_auth_date']);
-            $posts['language_type'] = empty($posts['language_type']) ? Configure::read('Config.languageType') : $posts['language_type'];
+            $posts['language_type'] = empty($posts['language_type']) ? Configure::read('Config.LanguageType') : $posts['language_type'];
             $options = array(
                 CURLOPT_URL => $url,
                 CURLOPT_HEADER => false,

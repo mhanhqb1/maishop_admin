@@ -111,7 +111,7 @@ class SimpleTableHelper extends AppHelper {
                 $columns[$i]['link'] = '';
             }
             if (!empty($item['href'])) {
-                $columns[$i]['href'] = $this->Html->Url($item['href']);
+                $columns[$i]['href'] = $item['href'];
             }
         }       
         

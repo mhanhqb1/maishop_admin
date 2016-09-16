@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="<?php echo BASE_URL ?>/css/plugins/morris.css?<?php echo VERSION_DATE ?>"/>
         
         <!-- Custom Fonts -->
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>/font-awesome/css/font-awesome.min.css?<?php echo VERSION_DATE ?>"/>
+        <link rel="stylesheet" href="<?php echo BASE_URL ?>/font-awesome/css/font-awesome.css?<?php echo VERSION_DATE ?>"/>
         
         <!-- Custom Css -->
         <link rel="stylesheet" href="<?php echo BASE_URL ?>/css/custom.css?<?php echo VERSION_DATE ?>"/>
