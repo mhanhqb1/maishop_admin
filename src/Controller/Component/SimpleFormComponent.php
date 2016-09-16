@@ -2,6 +2,7 @@
 
 namespace App\Controller\Component;
 use Cake\Controller\Component;
+use Cake\Network\Request;
 
 /**
  * 
@@ -12,7 +13,7 @@ use Cake\Controller\Component;
  * @author thailvn
  * @copyright Oceanize INC
  */
-class SimpleFormComponent extends Component {
+class SimpleFormComponent extends AppComponent {
 
     /** @var string $_modelName Model name */
     protected $_modelName = null;
@@ -121,7 +122,7 @@ class SimpleFormComponent extends Component {
      * @return self
      */
     public function addElement($item) {
-        $request = new CakeRequest();
+        $request = $this->request;
         $data = $this->getData();
         if ($request->is('get')) {
             $data = array_merge($data, $request->query);

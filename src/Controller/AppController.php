@@ -52,7 +52,11 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Cookie');
+        $this->loadComponent('Breadcrumb');
         $this->loadComponent('SimpleForm');
+        $this->loadComponent('SearchForm');
+        $this->loadComponent('UpdateForm');
+        $this->loadComponent('SimpleTable');
         list($lang, $languageType) = $this->getCurrentLanguage();
         I18n::locale($lang);
         $this->set('lang', $lang);
@@ -67,6 +71,8 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+        parent::beforeFilter($event);
+        
         // Redirect https
         if (Configure::read('Config.HTTPS') === true) {
             if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == "http") {
@@ -75,26 +81,34 @@ class AppController extends Controller
                 return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
             }
         }
-        parent::beforeFilter($event);
-
+        // Show breadcrumb
+        if (!empty($this->Breadcrumb->get())) {
+            $this->set('breadcrumbTitle', $this->Breadcrumb->getTitle());
+            $this->set('breadcrumb', $this->Breadcrumb->get());
+        }
+        // Show html form, table
+        if (!empty($this->SearchForm->get())) {
+            $this->set('searchForm', $this->SearchForm->get());
+        }
+        if (!empty($this->UpdateForm->get())) {
+            $this->set('updateForm', $this->UpdateForm->get());
+        }
+        if (!empty($this->SimpleTable->get())) {
+            $this->set('table', $this->SimpleTable->get());
+        }
+        
         // Set common param
         $this->controller = strtolower($this->request->params['controller']);
         $this->action = strtolower($this->request->params['action']);
         $this->set('controller', $this->controller);
         $this->set('action', $this->action);
-
-        // Only allow mobile access
-        if (Configure::read('Config.SupportPC') != true && !$this->RequestHandler->isMobile() && $this->controller != 'infos') {
-            return $this->redirect('/pc');
-        } else if (Configure::read('Config.SupportPC') != true && $this->RequestHandler->isMobile() && $this->controller == 'infos' && $this->action == 'pc') {
-            return $this->redirect('/');
-        }
         
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
+        $this->set('page', $this->request->query('page', 1));
         
         $this->viewBuilder()->layout('maishop');
     }

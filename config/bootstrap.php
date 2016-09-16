@@ -247,6 +247,10 @@ define('VERSION_DATE', date('Ymd'));
 define('BASE_URL', Router::fullBaseUrl());
 define('COOKIE_LANGUAGE', 'maishop.admin.cookie.language');
 Configure::write('Config.LanguageType', 1);
+Configure::write('Config.LanguageTypes', array(
+    1 => 'vi',
+    2 => 'en',
+));
 Configure::write('Config.Languages', array(
     'vi' => 1,
     'en' => 2

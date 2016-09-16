@@ -1,6 +1,6 @@
 <?php
 
-use AppComponent;
+namespace App\Controller\Component;
 
 /**
  * 

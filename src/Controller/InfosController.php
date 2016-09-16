@@ -2,19 +2,15 @@
 
 namespace App\Controller;
 
+use App\Lib\Api;
+use Cake\Core\Configure;
 /**
  * Show info
  */
 class InfosController extends AppController {
     
-    public function beforeRender(Event $event) {
-        parent::beforeRender($event);
-        $this->viewBuilder()->layout('empty');
-    }
-    
     public function index() {
-        phpinfo();
-        exit;
+        
     }
     
     public function cakephp() {

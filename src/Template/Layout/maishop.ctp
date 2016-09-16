@@ -153,9 +153,9 @@
             <div id="page-wrapper"  class="container_<?php echo $controller . '_' . $action; ?>">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            <?php echo !empty($pageHeader) ? $pageHeader : $controller;?>
-                        </h1>
+                        <?php if (!empty($breadcrumb)) : ?>
+                            <?php echo $this->Breadcrumb->render($breadcrumb, $breadcrumbTitle); ?>
+                        <?php endif ?>
                     </div>
                 </div>                
                 <?php echo $this->fetch('content'); ?>
