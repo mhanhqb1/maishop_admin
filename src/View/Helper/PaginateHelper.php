@@ -1,8 +1,10 @@
 <?php
+
 namespace App\View\Helper;
+
 /**
- * 
  * Render paging html
+ * 
  * @package View.Helper
  * @created 2014-11-29
  * @version 1.0
@@ -13,8 +15,8 @@ class PaginateHelper extends AppHelper {
 
     /** @var array $helpers Use helpers */
     public $helpers = array('Html');
-    
-     /**
+
+    /**
      * Render paging html
      *     
      * @author thailvn
@@ -24,9 +26,9 @@ class PaginateHelper extends AppHelper {
      * @param string $url If empty then get current url     
      * @return string Paging html 
      */
-    function render($total = 0, $limit = 0, $displayPage = 10, $url = '') {       
+    function render($total = 0, $limit = 0, $displayPage = 10, $url = '') {
         $page = !empty($this->request->query['page']) ? $this->request->query['page'] : 1;
-        if (empty($url)) {                     
+        if (empty($url)) {
             $param = array();
             foreach ($this->request->query as $name => $value) {
                 if ($name != 'page') {
@@ -39,11 +41,11 @@ class PaginateHelper extends AppHelper {
                     }
                 }
             }
-            $url = BASE_URL . '/' . $this->request->url . '?';
+            $url = $this->request->url . '?';
             if (!empty($param)) {
                 $url = $url . implode('&', $param) . '&';
-            }            
-        }      
+            }
+        }
         $nav = '';
         $totalPage = ceil($total / $limit);
         $delta = ceil($displayPage / 2);
@@ -61,7 +63,7 @@ class PaginateHelper extends AppHelper {
         } else {
             $start = 1;
             $end = $totalPage;
-        }       
+        }
         $html = '<div class="dataTables_paginate paging_bootstrap fr"><ul class="pagination">';
         if ($end > 1) {
             for ($i = $start; $i <= $end; $i++) {
@@ -86,10 +88,10 @@ class PaginateHelper extends AppHelper {
             $html .= "{$nav}";
             $html .= "{$next}";
         }
-        
+
         $html .= '</ul>';
         if ($total > $limit) {
-            $sumary = 'Showing '.(($page - 1) * $limit + 1).' to '.min($page * $limit, $total).' of '.$total.' entries';
+            $sumary = sprintf(__('LABEL_PAGING_SUMARY'), $total, ($page - 1) * $limit + 1, min($page * $limit, $total));
             $html .= "<div class=\"paging_sumary\">{$sumary}</div>";
         }
         $html .= '</div>';

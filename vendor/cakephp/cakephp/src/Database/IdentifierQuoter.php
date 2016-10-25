@@ -14,7 +14,6 @@
  */
 namespace Cake\Database;
 
-use Cake\Database\Expression\CrossSchemaTableExpression;
 use Cake\Database\Expression\FieldInterface;
 use Cake\Database\Expression\IdentifierExpression;
 use Cake\Database\Expression\OrderByExpression;
@@ -92,11 +91,6 @@ class IdentifierQuoter
 
         if ($expression instanceof IdentifierExpression) {
             $this->_quoteIdentifierExpression($expression);
-
-            return;
-        }
-        if ($expression instanceof CrossSchemaTableExpression) {
-            $this->_quoteCrossSchemaTableExpression($expression);
 
             return;
         }
@@ -186,7 +180,7 @@ class IdentifierQuoter
         list($table, $columns) = $query->clause('insert');
         $table = $this->_driver->quoteIdentifier($table);
         foreach ($columns as &$column) {
-            if (is_string($column)) {
+            if (is_scalar($column)) {
                 $column = $this->_driver->quoteIdentifier($column);
             }
         }
@@ -266,21 +260,5 @@ class IdentifierQuoter
         $expression->setIdentifier(
             $this->_driver->quoteIdentifier($expression->getIdentifier())
         );
-    }
-
-    /**
-     * Quotes the cross schema table identifier
-     *
-     * @param CrossSchemaTableExpression $expression The identifier to quote
-     * @return void
-     */
-    protected function _quoteCrossSchemaTableExpression(CrossSchemaTableExpression $expression)
-    {
-        if (!$expression->schema() instanceof ExpressionInterface) {
-            $expression->schema($this->_driver->quoteIdentifier($expression->schema()));
-        }
-        if (!$expression->table() instanceof ExpressionInterface) {
-            $expression->table($this->_driver->quoteIdentifier($expression->table()));
-        }
     }
 }

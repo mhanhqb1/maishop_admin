@@ -14,6 +14,7 @@
 namespace App\View;
 
 use Cake\View\View;
+use Cake\Core\Configure;
 
 /**
  * Application View
@@ -45,5 +46,14 @@ class AppView extends View
         $this->loadHelper('SimpleForm');
         $this->loadHelper('SimpleTable');
         $this->loadHelper('Paginate');
+    }
+    
+    /**
+     * Read config
+     * 
+     * @param string $config_name
+     */
+    public function read_config($config_name = '') {
+        return Configure::read($config_name);
     }
 }

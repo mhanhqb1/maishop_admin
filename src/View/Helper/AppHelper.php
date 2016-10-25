@@ -1,8 +1,10 @@
 <?php
+
 namespace App\View\Helper;
 
 use Cake\View\Helper;
-use Cake\View\View;
+use App\Controller\Component\CommonComponent;
+use Cake\Controller\ComponentRegistry;
 
 /**
  * Application helper
@@ -16,19 +18,7 @@ class AppHelper extends Helper {
 
     /** @var string $controller Controller name */
     public $controller;
-
-    /**
-     * Construct
-     *     
-     * @author thailvn   
-     * @param object $view View class     
-     * @return void 
-     */
-//    public function __construct(View $view, $settings = array()) {
-//        parent::__construct($view, $settings);
-//        $this->controller = $this->loadController();
-//    }
-
+    
     /**
      * Load a controller
      *     
@@ -37,8 +27,9 @@ class AppHelper extends Helper {
      * @return Object Controller 
      */
     protected function loadController($name = null) {
-        if (is_null($name))
+        if (is_null($name)) {
             $name = $this->params['controller'];
+        }
         $className = ucfirst($name) . 'Controller';
         list($plugin, $className) = pluginSplit($className, true);
         App::import('Controller', $name);
@@ -47,7 +38,7 @@ class AppHelper extends Helper {
         $cont->request = $this->request;
         return $cont;
     }
-    
+
     /**
      * Create Common component for helper
      *     
@@ -55,6 +46,7 @@ class AppHelper extends Helper {
      * @return Object Common component 
      */
     public static function getCommonComponent() {
-        return new CommonComponent(new ComponentCollection());
-    }    
+        return new CommonComponent(new ComponentRegistry());
+    }
+
 }

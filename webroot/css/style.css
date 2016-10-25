@@ -1,0 +1,266 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Hiragino Kaku Gothic Pro, "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", sans-serif;
+    font-size: 100%;
+}
+
+body {
+    background: #fff;
+    overflow-x: hidden;
+    font-size: 14px;
+}
+
+a {
+    outline: none !important;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border: none;
+    vertical-align: top;
+}
+
+.display_table {
+    display: table;
+}
+.display_row {
+    display: table-row;
+}
+.display_cell {
+    display: table-cell;
+}
+
+.shadow {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.shadow_bottom {
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+/* Non-Retina */
+@media screen and (-webkit-max-device-pixel-ratio: 1) {
+    .crisp {
+        image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+        image-rendering: -moz-crisp-edges;          /* Firefox                        */
+        image-rendering: -o-crisp-edges;            /* Opera                          */
+        image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+        image-rendering: pixelated;                 /* Chrome                         */
+        image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+        -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+    }
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #A5A4A4;
+   font-weight: normal !important;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #A5A4A4;
+   font-weight: normal !important;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #A5A4A4;
+   font-weight: normal !important;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #A5A4A4;
+   font-weight: normal !important;
+}
+
+ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.overflow_hidden {
+    overflow: hidden;
+}
+
+.txt_bold {
+    font-weight: bold;
+}
+
+.alert-warning {
+    background-color: #fcf8e3 !important;
+    border-color: #faebcc;
+    color: #8a6d3b !important;
+}
+
+/* Header ------------------------------------------------------------------- */
+.skin-black-light .main-header > .logo {
+    border-right: none;
+}
+
+.skin-black-light .main-header > .logo img {
+    vertical-align: middle;
+}
+
+.skin-black-light .navbar.navbar-static-top {
+    border-left: 1px solid #d3d6df;
+}
+
+@media (max-width: 767px) {
+    .skin-black-light .main-header > .logo {
+        background-color: #fff;
+        border-bottom: 1px solid #d3d6df;
+    }
+    
+    .skin-black-light .main-header > .logo img {
+        width: auto;
+        height: 80%;
+        margin: 0 auto;
+    }
+}
+
+/* Login page --------------------------------------------------------------- */
+.form-box{
+    margin: 150px auto 0 auto;
+    width: 360px;
+}
+
+.form-box .header {
+    background: #e61874;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -3px 0 rgba(0, 0, 0, 0.2) inset;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 300;
+    margin-top: 50px;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.form-box .footer {
+    border-radius: 0 0 4px 4px;
+}
+
+.form-box .body, .form-box .footer {
+    background: none repeat scroll 0 0 #fff;
+    color: #444;
+    padding: 10px 20px;
+}
+
+.bg-capture-red {
+    background-color: #e61874 !important;
+    color: #f9f9f9 !important;
+}
+
+/* Dashboard ---------------------------------------------------------------- */
+.content_top_index sup {
+    font-size: 20px;
+}
+
+/* Search box --------------------------------------------------------------- */
+.box-search .box-body {
+    padding-left: 0;
+}
+
+.box-search .form-group {
+    float: left;
+    width: 50%;
+    padding-left: 10px;
+}
+
+.box-search .button-group {
+    width: 100%;
+    clear: both;
+    margin-bottom: 0;
+    text-align: center;
+}
+.box-search .button-group .form-group {
+    float: none;
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.FormFromToContainer label {
+    clear: both;
+    width: 100%;
+}
+.FormFromToContainer .form_from_to_separator {
+    float: left;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    width: 8%;
+}
+.FormFromToContainer .form-group {
+    padding-left: 0;
+    width: 46%;
+}
+
+/* Data table bottom ---------------------------------------------------------*/
+.box-result .dataTables_paginate {
+    float: right;
+}
+
+.box-result .paging_sumary {
+    display: inline-block;
+    float: right;
+    padding: 6px;
+}
+
+.box-result .pagination {
+    float: right;
+    margin: 0;
+}
+
+.box-result .button-group {
+    float: left;
+}
+
+.box-result .button-group .form-group {
+    float: left;
+    margin-right: 10px;
+}
+
+/* Data update/create form -------------------------------------------------- */
+.input-required {
+    color: #f56954;
+    margin-left: 1px;
+}
+
+.box-update .button-group {
+    float: left;
+    margin-bottom: 0;
+}
+
+.box-update .button-group .form-group {
+    float: left;
+    margin-right: 10px;
+}
+
+/* Data detail page --------------------------------------------------------- */
+.padding10 {
+    padding: 10px;
+}
+
+/* Pace --------------------------------------------------------------------- */
+.pace .pace-progress {
+    background: #000;
+}
+
+.pace .pace-progress-inner {
+    box-shadow: 0 0 10px #000, 0 0 5px #000;
+}
+
+.pace .pace-activity {
+    display: none;
+    border-top-color: #000;
+    border-left-color: #000;
+}

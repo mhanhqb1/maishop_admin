@@ -3,8 +3,8 @@
 namespace App\Controller\Component;
 
 /**
+ * Create search form
  * 
- * create search form
  * @package Controller
  * @created 2014-11-27 
  * @version 1.0

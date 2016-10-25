@@ -1,0 +1,296 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: Sample\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: VCC <kiennh@vccvn.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "MESSAGE_FORMAT_INVALID"
+msgstr "%sの形式が正しくありません。"
+
+msgid "MESSAGE_INVALID_DATE_FROM_TO"
+msgstr "TO日時はFROM日より後の日時を入力してください"
+
+msgid "LABEL_EXPORT_ORDER"
+msgstr "注文データ出力"
+
+msgid "LABEL_DATE_FROM"
+msgstr "FROM日付"
+
+msgid "LABEL_DATE_TO"
+msgstr "TO日付"
+
+msgid "LABEL_COPYRIGHT"
+msgstr "Copyrights Baroque Japan Limited &copy; All Rights Reserved."
+
+msgid "LABEL_PROFILE"
+msgstr "プロフィール"
+
+msgid "LABEL_LOGOUT"
+msgstr "ログアウト"
+
+msgid "LABEL_MEMBER_FROM"
+msgstr "いつからメンバーになった%s"
+
+msgid "LABEL_DASHBOARD"
+msgstr "ダッシュボード"
+
+msgid "LABEL_EXPORT"
+msgstr "データ出力"
+
+msgid "LABEL_MASTER"
+msgstr "マスタ"
+
+msgid "LABEL_SETTING"
+msgstr "設定"
+
+msgid "LABEL_ORDERS"
+msgstr "Orders"
+
+msgid "LABEL_ITEMSETS"
+msgstr "アイテムセット"
+
+msgid "LABEL_ITEM"
+msgstr "アイテム"
+
+msgid "LABEL_ITEMSETS_LIST"
+msgstr "アイテムセット一覧"
+
+msgid "LABEL_ITEMS_LIST"
+msgstr "アイテム一覧"
+
+msgid "LABEL_CHARGE_RESPONSES"
+msgstr "Charge_responses"
+
+msgid "LABEL_HOME"
+msgstr "ホーム"
+
+msgid "LABEL_LOGIN"
+msgstr "ログイン"
+
+msgid "LABEL_LOGIN_ID"
+msgstr "ログインID"
+
+msgid "LABEL_PASSWORD"
+msgstr "パスワード"
+
+msgid "LABEL_REMEMBER_ME"
+msgstr "次回からログイン情報を省略"
+
+msgid "LABEL_PLEASE_CHECK"
+msgstr "ご確認ください"
+
+msgid "LABEL_INFO"
+msgstr "情報"
+
+msgid "MESSAGE_LOGIN_FAIL"
+msgstr "ログインID又はパスワードが正しくありません。再度入力してください。"
+
+msgid "MESSAGE_REQUIRED_LOGIN_ID"
+msgstr "ログインIDは必須項目です。"
+
+msgid "MESSAGE_REQUIRED_LOGIN_PASSWORD"
+msgstr "パスワードを入力してください。"
+
+msgid "MESSAGE_REQUIRED_LOGIN_PASSWORD_CONFIRM"
+msgstr "パスワード確認を入力してください。"
+
+msgid "MESSAGE_REQUIRED_ADMIN_TYPE"
+msgstr "アドミンタイプは必須項目です。"
+
+msgid "MESSAGE_PASSWORD_CONFIRM_NOT_MATCH"
+msgstr "確認用パスワードは正しくはありません"
+
+msgid "LABEL_UPDATE"
+msgstr "更新"
+
+msgid "LABEL_SEARCH"
+msgstr "検索"
+
+msgid "LABEL_NAME"
+msgstr "名前"
+
+msgid "LABEL_CHOOSE_ONE"
+msgstr "選択してください"
+
+msgid "LABEL_SORT_NAME_ASC"
+msgstr "名前の昇順"
+
+msgid "LABEL_SORT_NAME_DESC"
+msgstr "名前の降順"
+
+msgid "LABEL_SORT_ID_ASC"
+msgstr "IDの昇順"
+
+msgid "LABEL_SORT_ID_DESC"
+msgstr "IDの降順"
+
+msgid "LABEL_SORT_PRICE_ASC"
+msgstr "価格の昇順"
+
+msgid "LABEL_SORT_PRICE_DESC"
+msgstr "価格の降順"
+
+msgid "LABEL_SORT_STOCK_ASC"
+msgstr "在庫の昇順"
+
+msgid "LABEL_SORT_STOCK_DESC"
+msgstr "在庫の降順"
+
+msgid "LABEL_SORT"
+msgstr "並び順"
+
+msgid "LABEL_LIMIT"
+msgstr "表示数"
+
+msgid "LABEL_PRICE"
+msgstr "価格"
+
+msgid "LABEL_STOCK"
+msgstr "在庫"
+
+msgid "LABEL_CREATED"
+msgstr "作成日"
+
+msgid "LABEL_EDIT"
+msgstr "編集"
+
+msgid "LABEL_DELETE"
+msgstr "削除"
+
+msgid "LABEL_ID"
+msgstr "ID"
+
+msgid "LABEL_PAGING_SUMARY"
+msgstr "全%s件中、%s～%s件を表示しています"
+
+msgid "MESSAGE_SYSTEM_ERROR"
+msgstr "システムエラー、もう一度操作してください"
+
+msgid "LABEL_CLOSE"
+msgstr "戻る"
+
+msgid "LABEL_INFO"
+msgstr "情報"
+
+msgid "MESSAGE_CANNOT_UPDATE"
+msgstr "更新できません"
+
+msgid "MESSAGE_UPDATE_SUCCESSFULLY"
+msgstr "データ更新を完了しました"
+
+msgid "LABEL_DISABLE"
+msgstr "無効"
+
+msgid "LABEL_ENABLE"
+msgstr "有効"
+
+msgid "LABEL_IMAGE"
+msgstr "画像"
+
+msgid "LABEL_ITEMSETS_UPDATE"
+msgstr "アイテムセット情報編集"
+
+msgid "LABEL_ITEMSETS_DETAIL"
+msgstr "アイテムセット詳細"
+
+msgid "LABEL_ADD_NEW"
+msgstr "新規追加"
+
+msgid "MESSAGE_REQUIRED_NAME"
+msgstr "名前は必須項目です。"
+
+msgid "MESSAGE_REQUIRED_PRICE"
+msgstr "価格は必須項目です。"
+
+msgid "MESSAGE_REQUIRED_STOCK"
+msgstr "在庫は必須項目です。"
+
+msgid "MESSAGE_REQUIRED_NUMERIC_INPUT"
+msgstr "数字で入力してください"
+
+msgid "LABEL_SAVE"
+msgstr "保存"
+
+msgid "LABEL_CANCEL"
+msgstr "キャンセル"
+
+msgid "MESSAGE_SAVE_OK"
+msgstr "データの保存ができました。"
+
+msgid "MESSAGE_SAVE_NG"
+msgstr "データの保存ができませんでした。"
+
+msgid "LABEL_ITEMS_UPDATE"
+msgstr "アイテム情報編集"
+
+msgid "LABEL_ITEMS_DETAIL"
+msgstr "アイテム詳細"
+
+msgid "LABEL_NAME_SUB"
+msgstr "名前 SUB"
+
+msgid "LABEL_NAME_ENG"
+msgstr "名前 ENG"
+
+msgid "MESSAGE_UPLOAD_FILE_SIZE"
+msgstr "%s以下のファイルをアップロードしてください"
+
+msgid "MESSAGE_UPLOAD_FILE_TYPE"
+msgstr "画像ファイルのみをアップロードしてください"
+
+msgid "LABEL_NEW_PASSWORD"
+msgstr "新しいパスワード"
+
+msgid "LABEL_CONFIRM_PASSWORD"
+msgstr "パスワード確認"
+
+msgid "LABEL_CHANGE_PASSWORD"
+msgstr "パスワード変更"
+
+msgid "LABEL_PASSWORD"
+msgstr "パスワード"
+
+msgid "LABEL_ADMIN_LIST"
+msgstr "アドミン一覧"
+
+msgid "LABEL_ADMIN_DETAIL"
+msgstr "アドミン詳細"
+
+msgid "LABEL_ADMIN_LOGIN_ID"
+msgstr "ログインID"
+
+msgid "LABEL_ADMIN_TYPE"
+msgstr "アドミンタイプ"
+
+msgid "LABEL_CHANGE"
+msgstr "変更"
+
+msgid "-- Choose one --"
+msgstr "選択してください"
+
+msgid "LABEL_ADMINS_UPDATE"
+msgstr "アドミン編集"
+
+msgid "LABEL_ADMINS_LIST"
+msgstr "アドミン一覧"
+
+msgid "LABEL_CREATED_ASC"
+msgstr "作成日の昇順"
+
+msgid "LABEL_CREATED_DESC"
+msgstr "作成日の降順"
+
+msgid "LABEL_UPDATED_ASC"
+msgstr "更新日の昇順"
+
+msgid "LABEL_UPDATED_DESC"
+msgstr "更新日の降順"

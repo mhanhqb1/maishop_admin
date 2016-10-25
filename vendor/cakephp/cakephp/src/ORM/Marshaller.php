@@ -79,7 +79,9 @@ class Marshaller
         }
 
         // Map associations
-        $options += ['associated' => []];
+        if (!isset($options['associated'])) {
+            $options['associated'] = [];
+        }
         $include = $this->_normalizeAssociations($options['associated']);
         foreach ($include as $key => $nested) {
             if (is_int($key) && is_scalar($nested)) {
@@ -122,7 +124,7 @@ class Marshaller
         foreach ($behaviors->loaded() as $name) {
             $behavior = $behaviors->get($name);
             if ($behavior instanceof PropertyMarshalInterface) {
-                $map = $behavior->buildMarhshalMap($this, $map, $options);
+                $map += $behavior->buildMarshalMap($this, $map, $options);
             }
         }
 
@@ -545,10 +547,13 @@ class Marshaller
             if (isset($propertyMap[$key])) {
                 $value = $propertyMap[$key]($value, $entity);
 
-                // Don't dirty complex objects that were objects before.
-                $isObject = is_object($value);
-                if ((!$isObject && $original === $value) ||
-                    ($isObject && $original == $value)
+                // Don't dirty scalar values and objects that didn't
+                // change. Arrays will always be marked as dirty because
+                // the original/updated list could contain references to the
+                // same objects, even though those objects may have changed internally.
+                if ((is_scalar($value) && $original === $value) ||
+                    ($value === null && $original === $value) ||
+                    (is_object($value) && !($value instanceof EntityInterface) && $original == $value)
                 ) {
                     continue;
                 }
@@ -556,9 +561,9 @@ class Marshaller
             $properties[$key] = $value;
         }
 
+        $entity->errors($errors);
         if (!isset($options['fieldList'])) {
             $entity->set($properties);
-            $entity->errors($errors);
 
             foreach ($properties as $field => $value) {
                 if ($value instanceof EntityInterface) {
@@ -577,8 +582,6 @@ class Marshaller
                 }
             }
         }
-
-        $entity->errors($errors);
 
         return $entity;
     }

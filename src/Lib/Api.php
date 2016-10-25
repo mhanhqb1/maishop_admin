@@ -4,8 +4,8 @@ namespace App\Lib;
 
 use Cake\Core\Configure;
 use App\Lib\Log\AppLog;
-use Cake\Network\Session;
 use Cake\Network\Exception\InternalErrorException;
+use Cake\Routing\Router;
 
 /**
  * Call API
@@ -47,18 +47,22 @@ class Api {
      * @param object $defaultResult if response defaultResult if response empty   
      * @return object API response  
      */
-    public static function call($url, $requestData = array(), $json = false, $defaultResult = false) {
+    public static function call($url, $requestData = array(), $json = false, $defaultResult = false, $timeout = 0) {
         $url = Configure::read('API.Host') . static::getUrl($url);
         try {
+            if (empty($timeout)) {
+                $timeout = Configure::read('API.Timeout');
+            }
+            
             AppLog::info("START API: {$url}", __METHOD__, $requestData);
             $ch = curl_init();
             $headers = array("Content-Type:multipart/form-data");
             if (!isset($requestData['unauthorize'])) {
-                $session = new Session();
+                $session = Router::getRequest(true)->session();
                 $auth = $session->read('Auth');
-                if (!empty($auth['User']->token)) {
-                    $headers[] = "User-Id:" . $auth['User']->id;
-                    $headers[] = "Authorization:" . $auth['User']->token;
+                if (!empty($auth['User']['token'])) {
+                    $headers[] = "User-Id:" . $auth['User']['id'];
+                    $headers[] = "Authorization:" . $auth['User']['token'];
                 }
             }
             if ($json === true) {
@@ -68,14 +72,14 @@ class Api {
             $posts = array();
             if (!empty($requestData)) {
                 foreach ($requestData as $key => $value) {
-                    if (is_scalar($value) || $value instanceof CurlFile) {
+                    if (is_scalar($value) || $value instanceof \CURLFile) {
                         $posts[$key] = $value;
                     }
                 }
             }
             $posts['api_auth_date'] = strtotime(gmdate("M d Y H:i:s", strtotime(date('Y/m/d H:i:s'))));
             $posts['api_auth_key'] = hash('md5', Configure::read('API.secretKey') . $posts['api_auth_date']);
-            $posts['language_type'] = empty($posts['language_type']) ? Configure::read('Config.LanguageType') : $posts['language_type'];
+            $posts['from_admin'] = 1;
             $options = array(
                 CURLOPT_URL => $url,
                 CURLOPT_HEADER => false,
@@ -85,7 +89,8 @@ class Api {
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SAFE_UPLOAD => false,
                 CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_TIMEOUT => Configure::read('API.Timeout'),
+                CURLOPT_TIMEOUT => $timeout,
+                CURLOPT_USERAGENT => env('HTTP_USER_AGENT'),
             );
             curl_setopt_array($ch, $options);
             $jsonResponse = curl_exec($ch);
@@ -138,7 +143,7 @@ class Api {
             throw new InternalErrorException($e->getMessage());
         }
     }
-
+    
     /**
      * Get api error 
      *         

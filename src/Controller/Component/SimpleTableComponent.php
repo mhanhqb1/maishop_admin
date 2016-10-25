@@ -15,19 +15,19 @@ class SimpleTableComponent extends AppComponent {
 
     /** @var string $__modelName Model name */
     private $__modelName = null;
-    
+
     /** @var array $__columns List columns */
     private $__columns = array();
-    
+
     /** @var array $__dataset Dataset */
     private $__dataset = array();
-    
+
     /** @var array $__buttons List Button  */
     private $__buttons = array();
-    
+
     /** @var array $__hiddens List Hidden */
     private $__hiddens = array();
-    
+
     /** @var array $__mergeColumns List merged columns */
     private $__mergeColumns = array();
 

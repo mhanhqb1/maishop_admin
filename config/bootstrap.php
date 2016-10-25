@@ -229,12 +229,26 @@ Plugin::load('Migrations');
 include_once ('apiurl.php');
 
 Configure::write('Config.HTTPS', false);
-Configure::write('Config.SupportPC', false);
-Configure::write('Config.language', 'vi');
-Configure::write('Config.language_type', array(
-    1 => 'vi',
-    2 => 'en'
+Configure::write('Config.PageSize', 10);
+Configure::write('Config.CookieExpires', '+1 month');
+Configure::write('Config.StrChooseOne', __('LABEL_CHOOSE_ONE'));
+Configure::write('Config.searchPageSize', array(
+    10 => 10,
+    20 => 20,
+    30 => 30,
+    40 => 40,
+    50 => 50,
+    60 => 60,
+    70 => 70,
+    80 => 80,
+    90 => 90,
+    100 => 100,
 ));
+Configure::write('Config.searchAdminType', array(
+    0 => __('Ambassador'),
+    1 => __('Admin')
+));
+Configure::write('Config.StrChooseOne', __('-- Choose one --'));
 
 if ($env == 'production') {
     include_once ('production/bootstrap.php');
@@ -242,16 +256,8 @@ if ($env == 'production') {
     include_once ('development/bootstrap.php');
 }
 
-define('DEFAULT_SITE_TITLE', 'Mai Shop');
+define('DEFAULT_SITE_TITLE', 'Ameeplus');
 define('VERSION_DATE', date('Ymd'));
-define('BASE_URL', Router::fullBaseUrl());
-define('COOKIE_LANGUAGE', 'maishop.admin.cookie.language');
-Configure::write('Config.LanguageType', 1);
-Configure::write('Config.LanguageTypes', array(
-    1 => 'vi',
-    2 => 'en',
-));
-Configure::write('Config.Languages', array(
-    'vi' => 1,
-    'en' => 2
-));
+if (!defined('USE_SUB_DIRECTORY')) {
+    define('USE_SUB_DIRECTORY', '');
+}

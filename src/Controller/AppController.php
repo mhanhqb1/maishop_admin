@@ -17,7 +17,9 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\Core\Configure;
-use Cake\I18n\I18n;
+use Cake\Routing\Router;
+use App\Lib\Log\AppLog;
+use App\Lib\Api;
 
 /**
  * Application Controller
@@ -30,11 +32,17 @@ use Cake\I18n\I18n;
 class AppController extends Controller
 {
 
+    /** @var object $AppUI Session infomation of user logged. */
+    public $AppUI = null;
+    
     /** @var object $controller Controller name. */
     public $controller = null;
 
     /** @var object $action Action name. */
     public $action = null;
+    
+    public $current_url = '';
+    public $BASE_URL = '';
 
     /**
      * Initialization hook method.
@@ -51,29 +59,33 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->loadComponent('Cookie');
+        $this->loadComponent('Cookie', [
+            'expires' => Configure::read('Config.CookieExpires'),
+            'httpOnly' => true
+        ]);
         $this->loadComponent('Common');
         $this->loadComponent('Breadcrumb');
         $this->loadComponent('SimpleForm');
         $this->loadComponent('SearchForm');
         $this->loadComponent('UpdateForm');
         $this->loadComponent('SimpleTable');
-        list($lang, $languageType) = $this->getCurrentLanguage();
-        I18n::locale($lang);
-        $this->set('lang', $lang);
-        Configure::write('Config.LanguageType', $languageType);
+        $this->loadComponent('Auth', array(
+            'loginRedirect' => false,
+            'logoutRedirect' => false,
+            'loginAction' => array(
+                'controller' => 'login',
+                'action' => 'index',
+                'plugin' => null
+            ),
+            'sessionKey' => 'Auth.HNKSenpai'
+        ));
     }
-
+    
     /**
-     * Before render callback.
-     *
-     * @param \Cake\Event\Event $event The beforeRender event.
-     * @return void
+     * Before filter event
+     * @param Event $event
      */
-    public function beforeRender(Event $event)
-    {
-        parent::beforeFilter($event);
-        
+    public function beforeFilter(Event $event) {
         // Redirect https
         if (Configure::read('Config.HTTPS') === true) {
             if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == "http") {
@@ -82,12 +94,37 @@ class AppController extends Controller
                 return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
             }
         }
-        // Show breadcrumb
+        parent::beforeFilter($event);
+        
+        $this->controller = strtolower($this->request->params['controller']);
+        $this->action = strtolower($this->request->params['action']);
+        $this->current_url = Router::url($this->here, true);
+        $this->BASE_URL = Router::fullBaseUrl() . USE_SUB_DIRECTORY;
+        
+        // Redirect Auth
+        if ($this->isAuthorized()) {
+            if ($this->controller == 'login' && $this->action == 'index') {
+                return $this->redirect('/');
+            }
+        }
+    }
+
+    /**
+     * Before render callback.
+     *
+     * @param \Cake\Event\Event $event The beforeRender event.
+     * @return void
+     */
+    public function beforeRender(Event $event) {
+        parent::beforeRender($event);
+        
+        // Breadcrumb
         if (!empty($this->Breadcrumb->get())) {
             $this->set('breadcrumbTitle', $this->Breadcrumb->getTitle());
             $this->set('breadcrumb', $this->Breadcrumb->get());
         }
-        // Show html form, table
+        
+        // Form / Table
         if (!empty($this->SearchForm->get())) {
             $this->set('searchForm', $this->SearchForm->get());
         }
@@ -98,55 +135,117 @@ class AppController extends Controller
             $this->set('table', $this->SimpleTable->get());
         }
         
+        // Auth
+        if (isset($this->Auth) && $this->isAuthorized()) {
+            $this->set('AppUI', $this->Auth->user());
+        }
+
         // Set common param
-        $this->controller = strtolower($this->request->params['controller']);
-        $this->action = strtolower($this->request->params['action']);
         $this->set('controller', $this->controller);
         $this->set('action', $this->action);
+        $this->set('current_url', $this->current_url);
+        $this->set('BASE_URL', $this->BASE_URL);
+        $this->set('url', $this->request->url);
+        $this->set('referer', Controller::referer());
+
+        // Set default layout
+        $this->setLayout();
         
-        if (!array_key_exists('_serialize', $this->viewVars) &&
-            in_array($this->response->type(), ['application/json', 'application/xml'])
-        ) {
-            $this->set('_serialize', true);
+        // Check to use common view
+        $templatePath = $this->viewBuilder()->templatePath();
+        $viewName = $this->action . '.ctp';
+        $viewPath = APP . 'Template' . DS . $templatePath . DS . $viewName;
+        $commonViewPath = APP . 'Template' . DS . 'Common' . DS . $viewName;
+        if (!file_exists($viewPath) && file_exists($commonViewPath)) {
+            $this->viewBuilder()->templatePath('Common');
         }
-        $this->set('page', $this->request->query('page', 1));
-        
-        $this->viewBuilder()->layout('maishop');
     }
     
     /**
-     * get current language
-     *
-     * @param none.
-     * @return string
+     * Commont function check user is Authorized..
+     * 
+     * 
+     * @param object $user Session user logged.
+     * @return boolean  If true is authorize, and false is unauthorize.
      */
-    public function getCurrentLanguage() {
-        if (isset($this->request->query['lang'])) {
-            $language = $this->request->query['lang'];
-        } else {
-            if ($this->Cookie->check(COOKIE_LANGUAGE)) {
-                $language = $this->Cookie->read(COOKIE_LANGUAGE);
-            } else {
-                $language = 'vi';
+    public function isAuthorized($user = null) {
+        if (!isset($this->Auth)) {
+            return false;
+        }
+        if (empty($user)) {
+            $user = $this->Auth->user();
+        }
+        if (!empty($user)) {
+            $this->AppUI = $user;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Commont function to get params of actions in controller.
+     * 
+     * @param array $default List parameter name. Default is array().
+     * @return array
+     */
+    public function getParams($default = array()) {
+        $params = $this->request->query;
+        if (!empty($default)) {
+            foreach ($default as $paramName => $paramValue) {
+                if (!isset($params[$paramName])) {
+                    $params[$paramName] = $paramValue;
+                }
             }
         }
-        list($language, $languageType) = $this->validateLang($language);
-        $this->Cookie->write(COOKIE_LANGUAGE, $language);
-        return array($language, $languageType);
+        return $params;
     }
     
     /**
-     * Check valid language
-     * @param string $language
-     * @param int return 2 or 3 digit
-     * @return string
+     * Commont function set layout for view.
      */
-    protected function validateLang($lang) {
-        $languages = Configure::read('Config.Languages');
-        $data = array('vi', 1);
-        if (array_key_exists($lang, $languages)) {
-            $data = array($lang, $languages[$lang]);
+    public function setLayout() {
+        if ($this->controller == 'login' || $this->controller == 'infos') {
+            $this->viewBuilder()->layout('empty');
+        } else if ($this->controller == 'ajax') {
+            $this->viewBuilder()->layout('ajax');
+        } else {
+            $this->viewBuilder()->layout('default');
         }
-        return $data;
     }
+    
+    /**
+     * Commont function creater message notification.
+     * 
+     * @return object
+     */
+    public function doGeneralAction() {
+        $data = $this->request->data;
+        if ($this->request->is('post')) {
+            if (!empty($data['actionId'])) {
+                $data['items'] = array($data['actionId']);
+            }
+            if (!empty($data['action']) && !empty($data['items'])) {
+                $action = $data['action'];
+                $param['id'] = implode(',', $data['items']);
+                switch ($action) {
+                    case 'enable':
+                    case 'disable':
+                        $param['disable'] = ($data['action'] == 'disable' ? 1 : 0);
+                        Api::call("{$this->request->params['controller']}/disable", $param);
+                        $error = Api::getError();
+                        if ($error) {
+                            AppLog::warning("Can not update", __METHOD__, $data);
+                            $this->Flash->error(__('MESSAGE_CANNOT_UPDATE'));
+                        } else {
+                            $this->Flash->success(__('MESSAGE_UPDATE_SUCCESSFULLY'));
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return $this->redirect($this->request->here(false));
+            }
+        }
+    }
+
 }

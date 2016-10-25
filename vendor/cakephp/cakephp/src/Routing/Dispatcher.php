@@ -14,13 +14,11 @@
  */
 namespace Cake\Routing;
 
-use Cake\Controller\Controller;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventListenerInterface;
 use Cake\Http\ActionDispatcher;
 use Cake\Network\Request;
 use Cake\Network\Response;
-use LogicException;
 
 /**
  * Dispatcher converts Requests into controller actions. It uses the dispatched Request
@@ -58,10 +56,7 @@ class Dispatcher
      */
     public function dispatch(Request $request, Response $response)
     {
-        $actionDispatcher = new ActionDispatcher(null, $this->eventManager());
-        foreach ($this->_filters as $filter) {
-            $actionDispatcher->addFilter($filter);
-        }
+        $actionDispatcher = new ActionDispatcher(null, $this->eventManager(), $this->_filters);
         $response = $actionDispatcher->dispatch($request, $response);
         if (isset($request->params['return'])) {
             return $response->body();

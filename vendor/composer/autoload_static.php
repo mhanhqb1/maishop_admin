@@ -32,6 +32,7 @@ class ComposerStaticInitff823e9d30001b9106a9258418af41fa
             'Symfony\\Component\\Yaml\\' => 23,
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Filesystem\\' => 29,
+            'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
         ),
@@ -94,6 +95,10 @@ class ComposerStaticInitff823e9d30001b9106a9258418af41fa
         'Symfony\\Component\\Filesystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/filesystem',
+        ),
+        'Symfony\\Component\\EventDispatcher\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
         ),
         'Symfony\\Component\\Console\\' => 
         array (
@@ -166,6 +171,13 @@ class ComposerStaticInitff823e9d30001b9106a9258418af41fa
     );
 
     public static $prefixesPsr0 = array (
+        'W' => 
+        array (
+            'WebPay\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/webpay/webpay/src',
+            ),
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 
@@ -182,6 +194,17 @@ class ComposerStaticInitff823e9d30001b9106a9258418af41fa
             'JakubOnderka\\PhpConsoleColor' => 
             array (
                 0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
+            ),
+        ),
+        'G' => 
+        array (
+            'Guzzle\\Tests' => 
+            array (
+                0 => __DIR__ . '/..' . '/guzzle/guzzle/tests',
+            ),
+            'Guzzle' => 
+            array (
+                0 => __DIR__ . '/..' . '/guzzle/guzzle/src',
             ),
         ),
         'D' => 

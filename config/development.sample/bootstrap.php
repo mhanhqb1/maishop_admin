@@ -5,6 +5,7 @@
 
 use Cake\Core\Configure;
 
-Configure::write('API.Host', '');
+define('USE_SUB_DIRECTORY', '');
+
+Configure::write('API.Host', 'http://api.maishop.localhost/');
 Configure::write('Config.HTTPS', false);
-Configure::write('Config.SupportPC', false);

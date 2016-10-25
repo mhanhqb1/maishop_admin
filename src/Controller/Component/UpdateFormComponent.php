@@ -3,8 +3,8 @@
 namespace App\Controller\Component;
 
 /**
+ * Create update form
  * 
- * create update form
  * @package Controller
  * @created 2014-11-27 
  * @version 1.0
@@ -12,6 +12,5 @@ namespace App\Controller\Component;
  * @copyright Oceanize INC
  */
 class UpdateFormComponent extends SimpleFormComponent {
-
-   
+    
 }

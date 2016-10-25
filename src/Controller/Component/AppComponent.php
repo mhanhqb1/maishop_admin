@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller\Component;
+
 use Cake\Controller\Component;
 
 /**
@@ -14,7 +15,7 @@ use Cake\Controller\Component;
  */
 class AppComponent extends Component {
 
-     /**
+    /**
      * Replace id to Custom ID (fix bug of core)
      *    
      * @author thailvn

@@ -1,241 +1,112 @@
 <?php
 
 namespace App\Controller\Component;
-use Cake\Controller\Component;
+
+use Cake\Network\Exception\NotFoundException;
+use App\Controller\Component\AppComponent;
+use App\Lib\Log\AppLog;
+use Cake\Validation\Validation;
 
 /**
+ * Some common methods
  * 
- * some common methods
- * @package Controller
- * @created 2014-11-26 
+ * @package Controller/Component
+ * @created 2016-09-28
  * @version 1.0
- * @author thailvn
+ * @author KienNH
  * @copyright Oceanize INC
  */
 class CommonComponent extends AppComponent {
 
-    /** @var array $components Use components */
-    public $components = array('Session', 'Auth', 'RequestHandler');
-
     /**
-     * Set flash success message
-     *   
+     * Handle exception base on error array of API
+     * 
      * @author thailvn
-     * @param string $message Success message
+     * @param array $errors
+     * @throws NotFoundException
      * @return void
      */
-    public function setFlashSuccessMessage($message) {
-        $message = "<i class=\"fa fa-check\"></i>{$message}";
-        $this->Session->setFlash(
-            $message, 'default', array('class' => 'alert alert-success alert-dismissable')
-        );
-    }
-
-    /**
-     * Set flash error message
-     *    
-     * @author thailvn
-     * @param array $errors API error
-     * @param array $mapErrors ADM error
-     * @return void
-     */
-    public function setFlashErrorMessage($errors, $mapErrors = array()) {
-        if (!empty($mapErrors)) {
-            foreach ($mapErrors as $field => $error) {
-                if (isset($errors[$field])) {
-                    $errors[$field] = $error;
+    public function handleException($errors) {
+        if (!empty($errors)) {
+            foreach ($errors as $error) {
+                switch (key($error)) {
+                    case '1010':  // not exist error  
+                    case '1002':  // length is invalid 
+                    case '1012':  // must contain a valid number                         
+                        AppLog::info("Validation error API", __METHOD__, $errors);
+                        throw new NotFoundException($error[key($error)], 404);
                 }
-            }            
-        }
-        $message = "<i class=\"fa fa-check\"></i>{$this->parseArrayMessage($errors)}";
-        $this->Session->setFlash(
-            $message, 'default', array('class' => 'alert alert-warning alert-dismissable')
-        );
-    }
-
-    /**
-     * Parse message array to cms's format
-     *     
-     * @author thailvn     
-     * @param array $arrayMessage List message
-     * @param string $sep Seperate messages
-     * @return string html message
-     */
-    public function parseArrayMessage($arrayMessage, $sep = '<br/>') {
-        $html = "<span class=\"fa fa-ban\"></span>";
-        $html = '';
-        if (empty($arrayMessage))
-            return '';
-        if (is_string($arrayMessage)) {
-            $html .= $arrayMessage;
-            return $html;
-        }
-        $result = array();
-        foreach ($arrayMessage as $message) {
-            if (empty($message))
-                continue;
-            if (is_array($message)) {
-                foreach ($message as $value) {
-                    $result[] = $value;
-                }
-            } else {
-                $result[] = $message;
             }
         }
-        $html .= implode($sep, $result);
-        return $html;
     }
-
+    
     /**
-     * Get file info when form to be submited
+     * Date format for application
      *    
-     * @author thailvn    
-     * @param string $field Field name
-     * @return array File info
+     * @author thailvn
+     * @param int $time Input DateTime        
+     * @return string Date
      */
-    public function getFile($field) {
-        if (empty($_FILES['data']['name']))
+    public function dateFormat($time = null, $onlyDate = false) {
+        if (empty($time) || !is_numeric($time)) {
             return false;
-        if (empty($field) OR $field === '')
+        }
+        if ($onlyDate == true) {
+            return date('Y-d', $time);
+        }
+        $minuteAgo = ceil((time() - $time) / 60);
+        if ($minuteAgo > 0 && $minuteAgo < 60) {
+            return str_pad($minuteAgo, 2, '0', STR_PAD_LEFT) . " minutes before";
+        } elseif ($minuteAgo > 0 && $minuteAgo < 24 * 60) {
+            return str_pad(ceil($minuteAgo / 60), 2, '0', STR_PAD_LEFT) . " hours before";
+        }
+        return date('Y-d', $time);
+    }
+    
+    /**
+     * Date format (from string) for application
+     *    
+     * @author KienNH
+     * @param int $time Input DateTime        
+     * @return string Date
+     */
+    public function dateFormatFromString($strDate = null, $onlyDate = false) {
+        if (empty($strDate)) {
             return false;
-        $exploded = explode('.', $field);
-        if (count($exploded) !== 2)
+        }
+        $time = strtotime($strDate);
+        if ($time > 0 && $time != '') {
+            return $this->dateFormat($time, $onlyDate);
+        }
+    }
+
+    /**
+     * Number format
+     * 
+     * @param int $number
+     * @return boolean|string
+     */
+    public function nunmberFormat($number = 0) {
+        if (!is_numeric($number)) {
             return false;
-        list ($model, $value) = $exploded;
-        $file['name'] = $_FILES['data']['name'][$model][$value];
-        $file['type'] = $_FILES['data']['type'][$model][$value];
-        $file['tmp_name'] = $_FILES['data']['tmp_name'][$model][$value];
-        $file['error'] = $_FILES['data']['error'][$model][$value];
-        $file['size'] = $_FILES['data']['size'][$model][$value];
-        return $file;
-    }
-
-    /**
-     * Create message to write log
-     *     
-     * @author thailvn
-     * @param string $message    
-     * @param array|object $data Data to write log
-     * @return string Message
-     */
-    public function getLogMessage($message, $data = array()) {
-        $arrayMessage[] = $message;
-        if (!empty($data)) {
-            $arrayMessage[] = $data;
         }
-        return $this->parseArrayMessage($arrayMessage, '\n');
+        return number_format($number);
     }
-
+    
     /**
-     * Get string ramdom
+     * Date time format for application
      *    
      * @author thailvn
-     * @param int $length Length of random string  
-     * @param string $chars Chars for random string
-     * @return string Random string 
+     * @param int $time Input DateTime         
+     * @return string DateTime
      */
-    function stringRandom($length = 5, $chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') {
-        $intCount = 0;
-        $result = '';
-        do {
-            $result .= substr($chars, rand(0, strlen($chars) - 1), 1);
-            $intCount++;
-        } while ($intCount < $length);
-        return $result;
-    }
-
-    /**
-     * Convert array to key/value
-     *    
-     * @author thailvn
-     * @param array $arr 2D input array
-     * @param string $key Field key
-     * @param string $value Field value
-     * @return array
-     */
-    public static function arrayKeyValue($arr, $key, $value) {
-        $result = array();
-        if ($arr) {
-            foreach ($arr as $item) {
-                $result[$item[$key]] = $item[$value];
-            }
+    public function dateTimeFormat($time = null) {
+        if (empty($time)) {
+            return false;
         }
-        return $result;
+        return date('Y年m月d日 H:i', $time);
     }
-
-    /**
-     * Convert array to key/value array
-     *    
-     * @author thailvn
-     * @param array $arr 2D input array
-     * @param string $key Field key  
-     * @return array  
-     */
-    public static function arrayKeyValues($arr, $key) {
-        $result = array();
-        if ($arr) {
-            foreach ($arr as $item) {
-                $result[$item[$key]] = $item;
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * Filter record by find value
-     *    
-     * @author thailvn
-     * @param array $arr 2D input array
-     * @param string $field Field name
-     * @param $findValue Find value
-     * @return array  
-     */
-    public function arrayFilter($arr, $field, $findValue) {
-        $result = array();
-        if ($arr) {
-            foreach ($arr as $key => $item) {
-                if ($item[$field] == $findValue) {
-                    $result[] = $item;
-                }
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * Convert array to key array/value
-     *    
-     * @author thailvn
-     * @param array $arr 2D input array
-     * @param array $arr_key List keys
-     * @param string $rootKey Root key
-     * @return array  
-     */
-    public static function arrayKeyArrayValues($arr, $arr_key, $rootKey) {
-        $result = array();
-        if ($arr) {
-            foreach ($arr as $item) {
-                foreach ($arr_key as $itemKey) {
-                    $result[$item[$rootKey]][$itemKey] = $item[$itemKey];
-                }
-            }
-        }
-        return $result;
-    }
-   
-    /**
-     * Truncate string
-     *    
-     * @author thailvn
-     * @param string $text Input string
-     * @param int $length Length
-     * @param object $options See more String::truncate    
-     * @return string  
-     */
-    public function truncate($text, $length = 100, $options = array()) {
-        return String::truncate($text, $length, $options);
-    }
-
+    
     /**
      * Get thumb image url
      *     
@@ -255,155 +126,11 @@ class CommonComponent extends AppComponent {
             return $fileName;
         }
         $image = explode('.', $fileName);
-        if (count($image) < 2)
+        if (count($image) < 2) {
             return '';
+        }
         $fileName = sprintf($image[0], '_' . $size) . '.' . $image[1];
         return $fileName;
     }
 
-    /**
-     * Date format for application
-     *    
-     * @author thailvn
-     * @param int $time Input DateTime        
-     * @return string Date
-     */
-    public function dateFormat($time = null, $onlyDate = false) {
-        if (empty($time) || !is_numeric($time)) {
-            return false;
-        }
-        if($onlyDate == true){
-        	return date('Y年m月d日', $time);
-        }        
-        $minuteAgo = ceil((time() - $time) / 60);
-        if ($minuteAgo > 0 && $minuteAgo < 60) {
-            return str_pad($minuteAgo, 2, '0', STR_PAD_LEFT) . "分前";
-        } elseif ($minuteAgo > 0 && $minuteAgo < 24 * 60) {
-            return str_pad(ceil($minuteAgo / 60), 2, '0', STR_PAD_LEFT) . "時間前";
-        }
-        return date('Y年m月d日', $time);
-    }
-
-    /**
-     * Date time format for application
-     *    
-     * @author thailvn
-     * @param int $time Input DateTime         
-     * @return string DateTime
-     */
-    public function dateTimeFormat($time = null) {
-        if (empty($time)) {
-            return false;
-        }
-        return date('Y-m-d H:i', $time);
-    }
-
-    /**
-     * Handle exception base on error array of API
-     *    
-     * @author thailvn
-     * @param array $errors
-     * @throws NotFoundException
-     * @return void
-     */
-    public function handleException($errors) {
-        if (!empty($errors)) {
-            foreach ($errors as $error) {
-                switch (key($error)) {                    
-                    case '1010':  // not exist error  
-                    case '1002':  // length is invalid 
-                    case '1012':  // must contain a valid number                         
-                        AppLog::info("Validation error API", __METHOD__, $errors);
-                        throw new NotFoundException($error[key($error)], 404);
-                }
-            }
-        }
-    }
-    
-    public function throwNotFoundException() {
-        throw new NotFoundException();
-    }
-    
-    /**
-     * Array date for chart
-     *   
-     * @author thailvn
-     * @param array $arr   
-     * @param string $field Date field name    
-     * @return array
-     */
-    public function arrayDateForChart($arr, $field) {
-        if (empty($arr)) return array();
-        foreach ($arr as &$row) {
-            if (!isset($row[$field])) {
-                continue;
-            }
-            if (date('Y') == date('Y', strtotime($row[$field]))) {
-                $row[$field] = date('m/d', strtotime($row[$field]));
-            } else {
-                $row[$field] = date('y/m/d', strtotime($row[$field]));
-            }
-        }
-        unset($row);
-        return $arr;
-    }
-    
-    /**
-     * Delete cache after disable
-     *    
-     * @author thailvn
-     * @param string $controller Controller name         
-     * @return void
-     */
-    public function deleteCacheAfterDisable($controller = '') {
-        switch ($controller) {
-            case 'placecategories':
-                AppCache::delete(Configure::read('categories_all')->key);
-                break;
-            case 'newssites':
-            case 'newsfeeds':
-                AppCache::delete(Configure::read('tags_all')->key);
-                AppCache::delete(Configure::read('news_sites_all')->key);
-                break;    
-            default:                
-        }
-    }
-    
-    /**
-     * Render table
-     *    
-     * @author AnhMH
-     * @param array 
-     * @return html
-     */
-    public function renderTable($field, $data, $option = array()) {
-        $html = '<div class="place-request-table"><table width="100%">';
-        $html.= '<tr>'
-            . '<th width="5%"></th>'
-            . '<th width="30%">Value</th>'
-            . '<th width="15%">User</th>'
-            . '<th width="30%">Reason</th>'
-            . '<th width="20%">Date</th>'
-            . '</tr>';
-        foreach ($data as $value) {
-            if (!empty($option) && !empty($value['request_value'])) {
-                $value['request_value1'] = $option[$value['request_value']];
-            } else {
-                $value['request_value1'] = $value['request_value'];
-            }
-            $html .= '<tr>'
-            .'<td><input type="radio" class="place_'.$field.'" name="data[Place]['.$field.']" value="'.$value['request_value'].'"/></td>'
-            .'<td>'.$value['request_value1'].'</td>'
-            .'<td>'.$value['name'].'</td>'
-            .'<td>'.$value['reason_text'].'</td>'
-            .'<td>'.$this->dateFormat($value['created']).'</td>'
-            . '</tr>';
-        }
-        $html .= '<tr>'
-            .'<td><input type="radio" class="place_'.$field.'" name="data[Place]['.$field.']" value=""/></td>'
-            .'<td colspan="4">'.__('No change').'</td>'
-            . '</tr>';
-        $html .= '</table></div>';
-        return $html;
-    }
 }

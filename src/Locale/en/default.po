@@ -1,18 +1,296 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Project-Id-Version: MaiShop\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: Sample\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
-"Language-Team: AnhMH\n"
+"Language-Team: VCC <anhmh@vccvn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eng\n"
+"Language: vi\n"
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "LABEL_HELLO"
-msgstr "Hello!!"
+msgid "MESSAGE_FORMAT_INVALID"
+msgstr "%s invalid format."
 
+msgid "MESSAGE_INVALID_DATE_FROM_TO"
+msgstr "Invalid date from."
+
+msgid "LABEL_EXPORT_ORDER"
+msgstr "Order export"
+
+msgid "LABEL_DATE_FROM"
+msgstr "From"
+
+msgid "LABEL_DATE_TO"
+msgstr "To"
+
+msgid "LABEL_COPYRIGHT"
+msgstr "Copyrights MaiShop &copy; All Rights Reserved."
+
+msgid "LABEL_PROFILE"
+msgstr "Profile"
+
+msgid "LABEL_LOGOUT"
+msgstr "Logout"
+
+msgid "LABEL_MEMBER_FROM"
+msgstr "Member from %s"
+
+msgid "LABEL_DASHBOARD"
+msgstr "Dashboard"
+
+msgid "LABEL_EXPORT"
+msgstr "Export"
+
+msgid "LABEL_MASTER"
+msgstr "Master"
+
+msgid "LABEL_SETTING"
+msgstr "Setting"
+
+msgid "LABEL_ORDERS"
+msgstr "Orders"
+
+msgid "LABEL_ITEMSETS"
+msgstr "Itemsets"
+
+msgid "LABEL_ITEM"
+msgstr "Item"
+
+msgid "LABEL_ITEMSETS_LIST"
+msgstr "Itemsets list"
+
+msgid "LABEL_ITEMS_LIST"
+msgstr "Items list"
+
+msgid "LABEL_CHARGE_RESPONSES"
+msgstr "Charge responses"
+
+msgid "LABEL_HOME"
+msgstr "Home"
+
+msgid "LABEL_LOGIN"
+msgstr "Login"
+
+msgid "LABEL_LOGIN_ID"
+msgstr "Login ID"
+
+msgid "LABEL_PASSWORD"
+msgstr "Password"
+
+msgid "LABEL_REMEMBER_ME"
+msgstr "Remember me"
+
+msgid "LABEL_PLEASE_CHECK"
+msgstr "Please check"
+
+msgid "LABEL_INFO"
+msgstr "Info"
+
+msgid "MESSAGE_LOGIN_FAIL"
+msgstr "Login failed."
+
+msgid "MESSAGE_REQUIRED_LOGIN_ID"
+msgstr "Login ID is required."
+
+msgid "MESSAGE_REQUIRED_LOGIN_PASSWORD"
+msgstr "Password is required."
+
+msgid "MESSAGE_REQUIRED_LOGIN_PASSWORD_CONFIRM"
+msgstr "Password confirm is required."
+
+msgid "MESSAGE_REQUIRED_ADMIN_TYPE"
+msgstr "Admin type is required."
+
+msgid "MESSAGE_PASSWORD_CONFIRM_NOT_MATCH"
+msgstr "Password confirm not match."
+
+msgid "LABEL_UPDATE"
+msgstr "Update"
+
+msgid "LABEL_SEARCH"
+msgstr "Search"
+
+msgid "LABEL_NAME"
+msgstr "Name"
+
+msgid "LABEL_CHOOSE_ONE"
+msgstr "--- Please choose one ---"
+
+msgid "LABEL_SORT_NAME_ASC"
+msgstr "Name ASC."
+
+msgid "LABEL_SORT_NAME_DESC"
+msgstr "Name DESC."
+
+msgid "LABEL_SORT_ID_ASC"
+msgstr "ID ASC."
+
+msgid "LABEL_SORT_ID_DESC"
+msgstr "ID DESC."
+
+msgid "LABEL_SORT_PRICE_ASC"
+msgstr "Price ASC."
+
+msgid "LABEL_SORT_PRICE_DESC"
+msgstr "Price DESC."
+
+msgid "LABEL_SORT_STOCK_ASC"
+msgstr "Stock ASC."
+
+msgid "LABEL_SORT_STOCK_DESC"
+msgstr "Stock DESC."
+
+msgid "LABEL_SORT"
+msgstr "Sort"
+
+msgid "LABEL_LIMIT"
+msgstr "Limit"
+
+msgid "LABEL_PRICE"
+msgstr "Price"
+
+msgid "LABEL_STOCK"
+msgstr "Stock"
+
+msgid "LABEL_CREATED"
+msgstr "Created"
+
+msgid "LABEL_EDIT"
+msgstr "Edit"
+
+msgid "LABEL_DELETE"
+msgstr "Delete"
+
+msgid "LABEL_ID"
+msgstr "ID"
+
+msgid "LABEL_PAGING_SUMARY"
+msgstr "Total: %s, %s～%s displayed"
+
+msgid "MESSAGE_SYSTEM_ERROR"
+msgstr "System error"
+
+msgid "LABEL_CLOSE"
+msgstr "Close"
+
+msgid "LABEL_INFO"
+msgstr "Info"
+
+msgid "MESSAGE_CANNOT_UPDATE"
+msgstr "Can not update"
+
+msgid "MESSAGE_UPDATE_SUCCESSFULLY"
+msgstr "Update successfully"
+
+msgid "LABEL_DISABLE"
+msgstr "Disable"
+
+msgid "LABEL_ENABLE"
+msgstr "Enable"
+
+msgid "LABEL_IMAGE"
+msgstr "Image"
+
+msgid "LABEL_ITEMSETS_UPDATE"
+msgstr "Itemsets update"
+
+msgid "LABEL_ITEMSETS_DETAIL"
+msgstr "Itemsets detail"
+
+msgid "LABEL_ADD_NEW"
+msgstr "Add new"
+
+msgid "MESSAGE_REQUIRED_NAME"
+msgstr "The name is a required field"
+
+msgid "MESSAGE_REQUIRED_PRICE"
+msgstr "The price is a required field"
+
+msgid "MESSAGE_REQUIRED_STOCK"
+msgstr "The stock is a required field"
+
+msgid "MESSAGE_REQUIRED_NUMERIC_INPUT"
+msgstr "Please enter a number"
+
+msgid "LABEL_SAVE"
+msgstr "Save"
+
+msgid "LABEL_CANCEL"
+msgstr "Cancel"
+
+msgid "MESSAGE_SAVE_OK"
+msgstr "Successfully."
+
+msgid "MESSAGE_SAVE_NG"
+msgstr "Can not save."
+
+msgid "LABEL_ITEMS_UPDATE"
+msgstr "Item update"
+
+msgid "LABEL_ITEMS_DETAIL"
+msgstr "Item detail"
+
+msgid "LABEL_NAME_SUB"
+msgstr "Name SUB"
+
+msgid "LABEL_NAME_ENG"
+msgstr "Name ENG"
+
+msgid "MESSAGE_UPLOAD_FILE_SIZE"
+msgstr "Max size %s"
+
+msgid "MESSAGE_UPLOAD_FILE_TYPE"
+msgstr "Please update only image file."
+
+msgid "LABEL_NEW_PASSWORD"
+msgstr "New password"
+
+msgid "LABEL_CONFIRM_PASSWORD"
+msgstr "Password confirm"
+
+msgid "LABEL_CHANGE_PASSWORD"
+msgstr "Change password"
+
+msgid "LABEL_PASSWORD"
+msgstr "Password"
+
+msgid "LABEL_ADMIN_DETAIL"
+msgstr "Admin detail"
+
+msgid "LABEL_ADMIN_LOGIN_ID"
+msgstr "Login ID"
+
+msgid "LABEL_ADMIN_TYPE"
+msgstr "Admin type"
+
+msgid "LABEL_CHANGE"
+msgstr "Change"
+
+msgid "-- Choose one --"
+msgstr "-- Choose one --"
+
+msgid "LABEL_ADMINS_UPDATE"
+msgstr "Admin update"
+
+msgid "LABEL_ADMINS_LIST"
+msgstr "Admin list"
+
+msgid "LABEL_CREATED_ASC"
+msgstr "Created ASC"
+
+msgid "LABEL_CREATED_DESC"
+msgstr "Created DESC"
+
+msgid "LABEL_UPDATED_ASC"
+msgstr "Updated ASC"
+
+msgid "LABEL_UPDATED_DESC"
+msgstr "Updated DESC"
+
+msgid "LABEL_ADMIN_LIST"
+msgstr "Admin list"

@@ -1,5 +1,9 @@
 <?php
+
 namespace App\View\Helper;
+
+use Cake\Routing\Router;
+
 /**
  * 
  * Breadcrumb Helper - render breadcrumb html
@@ -23,23 +27,23 @@ class BreadcrumbHelper extends AppHelper {
      * @return string Html 
      */
     function render($breadcrumb = array(), $title = '') {
-
         if (empty($breadcrumb)) {
             return false;
         }
         if (empty($title)) {
-            $title = __('Dashboard');
+            $title = __('LABEL_DASHBOARD');
         }
-        $homeUrl = BASE_URL.'/';
-        $html = "<h1>{$title} <!-- <small>...</small> --></h1>";
+        $homeUrl = Router::fullBaseUrl() . USE_SUB_DIRECTORY;
+        
+        $html = "<h1>{$title}</h1>";
         $html .= "<ol class=\"breadcrumb\">";
-        $html .= "<li><a href=\"{$homeUrl}\"fa fa-dashboard\"></i> " . __('Home') . "</a></li>";
+        $html .= "<li><a href=\"{$homeUrl}\"><i class=\"fa fa-home\"></i> " . __('LABEL_HOME') . "</a></li>";
         foreach ($breadcrumb as $item) {
             if (!isset($item['link'])) {
                 $item['link'] = $this->request->here;
             }
             if (empty($item['link'])) {
-                $item['link'] = '#';
+                $item['link'] = 'javascrpt:;';
             }
             if (!empty($item['name'])) {
                 $html .= "<li><a href=\"{$item['link']}\">{$item['name']}</a></li>";
