@@ -271,6 +271,9 @@ msgstr "Admin type"
 msgid "LABEL_CHANGE"
 msgstr "Change"
 
+msgid "LABEL_DETAIL"
+msgstr "Detail"
+
 msgid "-- Choose one --"
 msgstr "-- Choose one --"
 
@@ -294,3 +297,15 @@ msgstr "Updated DESC"
 
 msgid "LABEL_ADMIN_LIST"
 msgstr "Admin list"
+
+msgid "LABEL_PRODUCTS_LIST"
+msgstr "Products list"
+
+msgid "LABEL_PRODUCTS_DETAIL"
+msgstr "Products detail"
+
+msgid "LABEL_PRODUCTS_UPDATE"
+msgstr "Products update"
+
+msgid "LABEL_DESCRIPTION"
+msgstr "Description"

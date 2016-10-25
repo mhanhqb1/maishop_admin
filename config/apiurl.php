@@ -26,3 +26,7 @@ Configure::write('API.url_itemsets_addupdate', 'itemsets/addupdate');
 Configure::write('API.url_items_list', 'items/list');
 Configure::write('API.url_items_detail', 'items/detail');
 Configure::write('API.url_items_addupdate', 'items/addupdate');
+
+Configure::write('API.url_products_list', 'products/list');
+Configure::write('API.url_products_addupdate', 'products/addUpdate');
+Configure::write('API.url_products_detail', 'products/detail');
