@@ -17,7 +17,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="treeview <?php if(in_array($controller, array('items', 'itemsets'))) echo ' active ' ?>">
+            <li class="treeview <?php if(in_array($controller, array('items', 'itemsets', 'products', 'orders'))) echo ' active ' ?>">
                 <a href="#">
                     <i class="fa fa-database"></i> <span><?php echo __('LABEL_MASTER') ?></span>
                     <span class="pull-right-container">
@@ -25,7 +25,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="<?php if(in_array($controller, array('items', 'itemsets'))) echo ' active ' ?>">
+                    <li class="<?php if(in_array($controller, array('items', 'itemsets', 'products', 'orders'))) echo ' active ' ?>">
                         <a href="#">
                             <i class="fa fa-th-list"></i> <?php echo __('LABEL_ITEMSETS') ?>
                             <span class="pull-right-container">
@@ -35,6 +35,7 @@
                         <ul class="treeview-menu">
                             <li class="<?php if($controller == 'items') echo ' active ' ?>"><a href="<?php echo $BASE_URL ?>/items"><i class="fa fa-file"></i> <?php echo __('LABEL_ITEM') ?></a></li>
                             <li class="<?php if($controller == 'itemsets') echo ' active ' ?>"><a href="<?php echo $BASE_URL ?>/itemsets"><i class="fa fa-clipboard"></i> <?php echo __('LABEL_ITEMSETS') ?></a></li>
+                            <li class="<?php if($controller == 'products') echo ' active ' ?>"><a href="<?php echo $BASE_URL ?>/products"><i class="fa fa-clipboard"></i> <?php echo __('LABEL_PRODUCTS') ?></a></li>
                         </ul>
                     </li>
                 </ul>

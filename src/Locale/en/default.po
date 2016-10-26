@@ -205,6 +205,9 @@ msgstr "Itemsets detail"
 msgid "LABEL_ADD_NEW"
 msgstr "Add new"
 
+msgid "LABEL_VIEW_ALL"
+msgstr "View all"
+
 msgid "MESSAGE_REQUIRED_NAME"
 msgstr "The name is a required field"
 
@@ -307,5 +310,14 @@ msgstr "Products detail"
 msgid "LABEL_PRODUCTS_UPDATE"
 msgstr "Products update"
 
+msgid "LABEL_PRODUCTS"
+msgstr "Products"
+
+msgid "LABEL_NEW_PRODUCTS"
+msgstr "New products"
+
 msgid "LABEL_DESCRIPTION"
 msgstr "Description"
+
+msgid "LABEL_NEW_ORDERS"
+msgstr "New orders"

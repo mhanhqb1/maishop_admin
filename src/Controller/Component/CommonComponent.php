@@ -60,7 +60,7 @@ class CommonComponent extends AppComponent {
         } elseif ($minuteAgo > 0 && $minuteAgo < 24 * 60) {
             return str_pad(ceil($minuteAgo / 60), 2, '0', STR_PAD_LEFT) . " hours before";
         }
-        return date('Y-d', $time);
+        return date('Y-m-d', $time);
     }
     
     /**
