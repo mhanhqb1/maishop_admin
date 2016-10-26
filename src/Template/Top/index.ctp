@@ -43,6 +43,26 @@
             <div class="icon"><i class="fa fa-usd"></i></div>
         </div>
     </a>
+    
+    <a href="javascript:;" target="" class="col-lg-3 col-xs-6">
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3><?php echo number_format($data['count_product']); ?>&nbsp;<sup></sup></h3>
+                <p>Products</p>
+            </div>
+            <div class="icon"><i class="fa fa-th-large"></i></div>
+        </div>
+    </a>
+    
+    <a href="javascript:;" target="" class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3><?php echo number_format($data['count_category']); ?>&nbsp;<sup></sup></h3>
+                <p>Categories</p>
+            </div>
+            <div class="icon"><i class="fa fa-sitemap"></i></div>
+        </div>
+    </a>
 </div>
 <div class="row">
     <?php if (!empty($data['orders'])): ?>

@@ -9,6 +9,7 @@ use App\Lib\Log\AppLog;
 $data = null;
 if (!empty($id)) {
     $param['id'] = $id;
+    $param['get_product_images'] = 1;
     $data = Api::call(Configure::read('API.url_products_detail'), $param);
     $this->Common->handleException(Api::getError());
     if (empty($data)) {

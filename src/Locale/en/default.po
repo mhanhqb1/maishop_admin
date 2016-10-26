@@ -321,3 +321,9 @@ msgstr "Description"
 
 msgid "LABEL_NEW_ORDERS"
 msgstr "New orders"
+
+msgid "LABEL_PRODUCTIMAGES_LIST"
+msgstr "Product images list"
+
+msgid "LABEL_PRODUCTIMAGES_UPDATE"
+msgstr "Product images update"
