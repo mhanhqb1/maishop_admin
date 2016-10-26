@@ -1,7 +1,7 @@
 <?php
 
 namespace App\View\Helper;
-
+use Cake\Routing\Router;
 /**
  * 
  * Some common helper
@@ -40,6 +40,63 @@ class CommonHelper extends AppHelper {
      */
     function endsWith($haystack, $needle) {
         return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
+    }
+    
+    /**
+     * Render CKEditor script
+     *     
+     * @author AnhMH
+     * @param array $params Options         
+     * @return string Html 
+     */
+    function editor($params = array()) {
+        include_once WWW_ROOT . 'ckeditor/ckeditor_custom.php';
+        include_once WWW_ROOT . 'ckfinder/ckfinder.php';    
+        $id = isset($params['id']) ? $params['id'] : '';
+        $value = isset($params['value']) ? $params['value'] : '';
+        $name  		= isset($params['name'])  	? $params['name']  	: '';
+        $value 		= isset($params['value']) 	? $params['value'] 	: '';		
+        $width 		= isset($params['width']) 	? $params['width'] 	: 0;		
+        $height		= isset($params['height']) 	? $params['height'] : 0;		
+        $CKEditor 	= new CKEditor();
+        $CKFinder   = new CKFinder();
+        $config 	= array();
+        $config['toolbar'] = array(
+            array( 'Source'),
+            array( 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'),	  
+            array( 'Image', 'Smiley', 'Table', 'Link', 'Unlink'),	  
+            array( 'Font','FontSize', 'Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript', '-', 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'TextColor', 'BGColor')
+        );
+        $config['height'] = $height;
+        $config['width']  = $width;	
+        //$config['filebrowserImageUploadUrl'] = Router::url('/') . "ckupload.php";	
+        //$config['filebrowserImageBrowseUrl'] = Router::url('/') . "ckbrowser.php";	
+        $events['instanceReady'] = 'function (ev) {
+            alert("Loaded: " + ev.editor.name);
+        }';
+        $CKEditor->basePath = Router::url('/') . 'ckeditor/';
+        
+        /*
+        $CKFinder->BasePath = Router::url('/') . 'ckfinder/';
+        $CKFinder->BaseUrl = Configure::read('Config.EditorImageUrl');       
+        $EditorUploadPath = Configure::read('Config.EditorUploadPath');
+        if (empty($EditorUploadPath)) {
+             $EditorUploadPath = WWW_ROOT . 'ckfinder' . DS . 'userfiles/'; 
+        }
+        $CKFinder->BaseDir = $EditorUploadPath; 
+        * 
+        */
+        $CKFinder->SetupCKEditorObject($CKEditor);
+        
+        $config['filebrowserBrowseUrl'] = Router::url('/') . 'ckfinder/ckfinder.html';
+        $config['filebrowserImageBrowseUrl'] = Router::url('/') . 'ckfinder/ckfinder.html?type=Images';
+        $config['filebrowserFlashBrowseUrl'] = Router::url('/') . 'ckfinder/ckfinder.html?type=Flash';
+        $config['filebrowserUploadUrl'] = Router::url('/') . 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
+        $config['filebrowserImageUploadUrl'] = Router::url('/') . 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
+        $config['filebrowserFlashUploadUrl'] = Router::url('/') . 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
+        $params['type'] = 'textarea';
+        $out = $CKEditor->editor($this->Form->input($id, $params), $id, $value, $config, null);
+        return $out;
     }
     
 }
