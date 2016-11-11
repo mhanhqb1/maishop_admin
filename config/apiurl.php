@@ -34,3 +34,8 @@ Configure::write('API.url_products_all', 'products/all');
 
 Configure::write('API.url_productimages_list', 'productimages/list');
 Configure::write('API.url_productimages_addupdate', 'productimages/addupdate');
+
+Configure::write('API.url_orders_list', 'orders/list');
+Configure::write('API.url_orders_addupdate', 'orders/addupdate');
+Configure::write('API.url_orders_detail', 'orders/detail');
+Configure::write('API.url_orders_all', 'orders/all');

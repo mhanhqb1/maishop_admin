@@ -330,3 +330,27 @@ msgstr "Product images list"
 
 msgid "LABEL_PRODUCTIMAGES_UPDATE"
 msgstr "Product images update"
+
+msgid "LABEL_ORDER"
+msgstr "Order"
+
+msgid "LABEL_ORDER_IS_PAID"
+msgstr "Is paid"
+
+msgid "LABEL_ORDER_IS_DEPOSIT"
+msgstr "Is deposit"
+
+msgid "LABEL_ORDER_IS_CANCEL"
+msgstr "Is cancel"
+
+msgid "LABEL_ORDER_STATUS"
+msgstr "Is cancel"
+
+msgid "LABEL_ORDER_LIST"
+msgstr "Order list"
+
+msgid "LABEL_USER_NAME"
+msgstr "User name"
+
+msgid "LABEL_ADDRESS"
+msgstr "Address"
