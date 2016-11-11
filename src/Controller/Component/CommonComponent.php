@@ -132,5 +132,26 @@ class CommonComponent extends AppComponent {
         $fileName = sprintf($image[0], '_' . $size) . '.' . $image[1];
         return $fileName;
     }
+    
+    /**
+     * Convert array to key/value
+     *    
+     * @author AnhMH
+     * @param array $arr 2D input array
+     * @param string $key Field key
+     * @param string $keyValue Field value
+     * @return array
+     */
+    public static function arrayKeyValue($arr, $key, $keyValue) {
+        $result = array();
+        if ($arr && is_array($arr)) {
+            foreach ($arr as $item) {
+                if (is_array($item) && key_exists($key, $item) && key_exists($keyValue, $item)) {
+                    $result[$item[$key]] = $item[$keyValue];
+                }
+            }
+        }
+        return $result;
+    }
 
 }
