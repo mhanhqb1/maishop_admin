@@ -109,13 +109,20 @@ $this->SimpleTable->addColumn(array(
         'title' => __('LABEL_STOCK'),
         'type' => 'number',
         'empty' => 0,
-        'width' => 80,
+        'width' => 40,
     ))
     ->addColumn(array(
         'id' => 'created',
         'title' => __('LABEL_CREATED'),
         'type' => 'date',
         'width' => 140
+    ))    
+    ->addColumn(array(
+        'type' => 'link',
+        'title' => __('Edit'),
+        'href' => '/'.$this->controller.'/update/{id}',
+        'button' => true,
+        'width' => '80'
     ))
     ->addColumn(array(
         'id' => 'disable',

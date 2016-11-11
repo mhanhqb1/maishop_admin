@@ -8,5 +8,5 @@ $apiUrl = "{$param['controller']}/disable";
 $result = Api::call($apiUrl, $param);
 if (empty($result) || Api::getError()) {
     AppLog::warning("Can not update", __METHOD__, $param);
-    echo __(MESSAGE_SYSTEM_ERROR);
+    echo __('MESSAGE_SYSTEM_ERROR');
 }
