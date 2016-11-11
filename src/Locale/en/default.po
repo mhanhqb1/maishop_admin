@@ -313,6 +313,9 @@ msgstr "Products update"
 msgid "LABEL_PRODUCTS"
 msgstr "Products"
 
+msgid "LABEL_PRODUCT_NAME"
+msgstr "Product name"
+
 msgid "LABEL_NEW_PRODUCTS"
 msgstr "New products"
 

@@ -10,7 +10,7 @@ $data = array();
 if (!empty($id)) {
     // Edit
     $param['id'] = $id;
-    $data = Api::call(Configure::read('API.url_products_detail'), $param);
+    $data = Api::call(Configure::read('API.url_productimages_detail'), $param);
     $this->Common->handleException(Api::getError());
     if (empty($data)) {
         AppLog::info("Item unavailable", __METHOD__, $param);
@@ -21,6 +21,9 @@ if (!empty($id)) {
     // Create new
     $pageTitle = __('LABEL_ADD_NEW');
 }
+
+// Get product data
+$productData = $this->Common->arrayKeyValue(Api::call(Configure::read('API.url_products_all'), array()), 'id', 'name');
 
 // Create breadcrumb
 $listPageUrl = h($this->BASE_URL . '/productimages');
@@ -43,6 +46,11 @@ $this->UpdateForm->reset()
         'type' => 'hidden',
         'label' => __('id'),
     ))
+    ->addElement(array(
+        'id' => 'product_id',
+        'label' => __('LABEL_PRODUCTS'),
+        'options'  => $productData
+    ))  
     ->addElement(array(
         'id' => 'image',
         'label' => __('LABEL_IMAGE'),

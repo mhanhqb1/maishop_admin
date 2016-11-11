@@ -17,7 +17,7 @@ $this->SearchForm
     ->setAttribute('type', 'get')
     ->addElement(array(
         'id' => 'name',
-        'label' => __('LABEL_NAME'),
+        'label' => __('LABEL_PRODUCT_NAME'),
     ))
     ->addElement(array(
         'id' => 'limit',
@@ -55,9 +55,6 @@ $this->SimpleTable->addColumn(array(
     ->addColumn(array(
         'id' => 'id',
         'title' => __('LABEL_ID'),
-        'type' => 'link',
-        'value' => '{id}',
-        'href'  => $this->BASE_URL . '/' . $this->controller . '/update/{id}',
         'width' => 10,
     ))
     ->addColumn(array(
@@ -69,7 +66,7 @@ $this->SimpleTable->addColumn(array(
     ))
     ->addColumn(array(
         'id' => 'name',
-        'title' => __('LABEL_NAME'),
+        'title' => __('LABEL_PRODUCT_NAME'),
         'empty' => '',
     ))
     ->addColumn(array(

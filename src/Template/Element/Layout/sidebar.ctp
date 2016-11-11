@@ -17,7 +17,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="treeview <?php if(in_array($controller, array('products', 'orders'))) echo ' active ' ?>">
+            <li class="treeview <?php if(in_array($controller, array('products', 'orders', 'productimages'))) echo ' active ' ?>">
                 <a href="#">
                     <i class="fa fa-database"></i> <span><?php echo __('LABEL_MASTER') ?></span>
                     <span class="pull-right-container">
@@ -25,7 +25,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="<?php if(in_array($controller, array('products'))) echo ' active ' ?>">
+                    <li class="<?php if(in_array($controller, array('products', 'productimages'))) echo ' active ' ?>">
                         <a href="#">
                             <i class="fa fa-th-list"></i> <?php echo __('LABEL_PRODUCTS') ?>
                             <span class="pull-right-container">
