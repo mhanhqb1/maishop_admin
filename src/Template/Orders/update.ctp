@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <form method="post" accept-charset="utf-8" role="form" enctype="multipart/form-data" novalidate="novalidate" action="/orders/update/<?php echo $id; ?>">
             <div class="box box-primary box-update">   
-                <div class="box-body">                
+                <div class="box-body">
                     <div class="form-body">
                         <div style="display:none;">
                             <input type="hidden" name="_method" class="form-control" value="POST">
@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <input type="submit" value="Save" class="btn btn-primary">
                             </div><div class="form-group">
-                                <input type="submit" value="Cancel" class="btn" onclick="return back('http://admin.maishop.localhost/products');">
+                                <input type="submit" value="Cancel" class="btn" onclick="return back();">
                             </div>
                             <div class="cls"></div>
 

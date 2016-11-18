@@ -344,7 +344,7 @@ msgid "LABEL_ORDER_IS_CANCEL"
 msgstr "Is cancel"
 
 msgid "LABEL_ORDER_STATUS"
-msgstr "Is cancel"
+msgstr "Status"
 
 msgid "LABEL_ORDER_LIST"
 msgstr "Order list"
@@ -354,3 +354,6 @@ msgstr "User name"
 
 msgid "LABEL_ADDRESS"
 msgstr "Address"
+
+msgid "LABEL_ORDER_DETAIL_CREATED"
+msgstr "Amount Due"
