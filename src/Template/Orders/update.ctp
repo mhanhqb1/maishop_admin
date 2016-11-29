@@ -21,8 +21,8 @@
                             <input type="text" name="stock" class="form-control" id="stock" required="required" value="1">
                         </div>
                         <div class="form-group text">
-                            <label class="" for="description">Description</label>
-                            <input type="text" name="description" class="form-control" id="description" value="abc">
+                            <input type="text" class="form-control" id="product_search" value="">
+                            <div id="product_result"></div>
                         </div>
                         <div class="form-group button-group">
                             <div class="form-group">

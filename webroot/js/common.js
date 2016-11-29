@@ -28,6 +28,26 @@ $(document).ready(function ($) {
         location.href = baseUrl + '/' + controller + '/update';
         return false;
     });
+    
+    // Autocomplete product
+    $('#product_search').unbind('keyup').bind('keyup', function() {
+        var val = $(this).val();
+        var result = $('#product_result');
+        var data = {
+            name: val
+        };
+        $.ajax({
+            type: "POST",
+            url: baseUrl + '/ajax/autocompleteproduct',
+            data: data,
+            success: function (response) {
+                console.log(response);
+                if (response) {
+                    result.html(response);
+                }
+            }
+        });
+    });
 });
 
 /**
