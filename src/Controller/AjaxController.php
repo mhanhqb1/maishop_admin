@@ -20,4 +20,11 @@ class AjaxController extends AppController {
         include ('Bus/Ajax/disable.php');
     }
     
+    /**
+     * Autocomplete products
+     */
+    public function autocompleteproduct() {
+        include ('Bus/Ajax/autocompleteproduct.php');
+    }
+    
 }

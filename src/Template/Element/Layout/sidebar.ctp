@@ -38,6 +38,19 @@
                         </ul>
                     </li>
                 </ul>
+                <ul class="treeview-menu">
+                    <li class="<?php if(in_array($controller, array('orders'))) echo ' active ' ?>">
+                        <a href="#">
+                            <i class="fa fa-th-list"></i> <?php echo __('LABEL_ORDERS') ?>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="<?php if($controller == 'orders') echo ' active ' ?>"><a href="<?php echo $BASE_URL ?>/orders"><i class="fa fa-clipboard"></i> <?php echo __('LABEL_ORDERS_LIST') ?></a></li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
             <li class="treeview <?php if(in_array($controller, array('admins'))) echo ' active ' ?>">
                 <a href="#">
