@@ -40,3 +40,7 @@ Configure::write('API.url_orders_list', 'orders/list');
 Configure::write('API.url_orders_addupdate', 'orders/addupdate');
 Configure::write('API.url_orders_detail', 'orders/detail');
 Configure::write('API.url_orders_all', 'orders/all');
+
+Configure::write('API.url_categories_list', 'categories/list');
+Configure::write('API.url_categories_detail', 'categories/detail');
+Configure::write('API.url_categories_addupdate', 'categories/addupdate');

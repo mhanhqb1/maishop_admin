@@ -10,24 +10,24 @@ $data = array();
 if (!empty($id)) {
     // Edit
     $param['id'] = $id;
-    $data = Api::call(Configure::read('API.url_products_detail'), $param);
+    $data = Api::call(Configure::read('API.url_categories_detail'), $param);
     $this->Common->handleException(Api::getError());
     if (empty($data)) {
         AppLog::info("Item unavailable", __METHOD__, $param);
         throw new NotFoundException("Item unavailable", __METHOD__, $param);
     }
-    $pageTitle = __('LABEL_PRODUCTS_UPDATE');
+    $pageTitle = __('LABEL_CATEGORIES_UPDATE');
 } else {
     // Create new
     $pageTitle = __('LABEL_ADD_NEW');
 }
 
 // Create breadcrumb
-$listPageUrl = h($this->BASE_URL . '/products');
+$listPageUrl = h($this->BASE_URL . '/categories');
 $this->Breadcrumb->setTitle($pageTitle)
     ->add(array(
         'link' => $listPageUrl,
-        'name' => __('LABEL_PRODUCTS_LIST'),
+        'name' => __('LABEL_CATEGORIES_LIST'),
     ))
     ->add(array(
         'name' => $pageTitle,
@@ -49,31 +49,17 @@ $this->UpdateForm->reset()
         'required' => true
     ))
     ->addElement(array(
-        'id' => 'price',
-        'label' => __('LABEL_PRICE'),
-        'required' => true
-    ))
-    ->addElement(array(
-        'id' => 'stock',
-        'label' => __('LABEL_STOCK'),
-        'required' => true
-    ))
-    ->addElement(array(
-        'id' => 'image',
+        'id' => 'image_path',
         'label' => __('LABEL_IMAGE'),
         'type' => 'file',
         'allowEmpty' => true,
         'image' => true,
     ))
     ->addElement(array(
-        'id' => 'description',
-        'label' => __('LABEL_DESCRIPTION'),
+        'id' => 'position',
+        'label' => __('LABEL_POSITION'),
+        'required' => true
     ))
-    ->addElement(array(
-        'id' => 'detail',
-        'label' => __('LABEL_DETAIL'),
-        'type'  => 'editor'
-    ))    
     ->addElement(array(
         'type' => 'submit',
         'value' => __('LABEL_SAVE'),
@@ -90,29 +76,27 @@ $this->UpdateForm->reset()
 if ($this->request->is('post')) {
     // Trim data
     $data = $this->request->data();
-    if (!empty($_FILES['image']) && $_FILES['image']['error'] === 0) {
-        $filetype = $_FILES['image']['type'];
-        $filename = $_FILES['image']['name'];
-        $filedata = $_FILES['image']['tmp_name'];
-        $data['image'] = new CurlFile($filedata, $filetype, $filename);
+    if (!empty($_FILES['image_path']) && $_FILES['image_path']['error'] === 0) {
+        $filetype = $_FILES['image_path']['type'];
+        $filename = $_FILES['image_path']['name'];
+        $filedata = $_FILES['image_path']['tmp_name'];
+        $data['image_path'] = new CurlFile($filedata, $filetype, $filename);
     }
+    
     foreach ($data as $key => $value) {
-        if ($key == 'image') {
+        if ($key == 'image_path') {
             continue;
         }
         $data[$key] = trim($value);
     }
-    
     // Validation
     if ($form->validate($data)) {
         // Call API to Login
-        $id = Api::call(Configure::read('API.url_products_addupdate'), $data);
-        $error = Api::getError();
+        $id = Api::call(Configure::read('API.url_categories_addupdate'), $data);
         if (!empty($id) && !Api::getError()) {
             $this->Flash->success(__('MESSAGE_SAVE_OK'));
             return $this->redirect("/{$this->controller}/update/{$id}");
         } else {
-            print_r($error);die();
             return $this->Flash->error(__('MESSAGE_SAVE_NG'));
         }
     }
