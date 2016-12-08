@@ -52,17 +52,10 @@ $this->UpdateForm->reset()
         'id' => 'image_path',
         'label' => __('LABEL_IMAGE'),
         'type' => 'file',
-        'required' => true
-    ));
-if (!empty($data['image_path'])) {
-    $this->UpdateForm->addElement(array(
-        'id' => 'old_image',
-        'label' => __('LABEL_IMAGE'),
-        'type' => 'image',
-        'value' => "{$data['image_path']}"
-    ));
-}
-$this->UpdateForm->addElement(array(
+        'allowEmpty' => true,
+        'image' => true,
+    ))
+    ->addElement(array(
         'id' => 'position',
         'label' => __('LABEL_POSITION'),
         'required' => true

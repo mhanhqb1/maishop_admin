@@ -59,6 +59,13 @@ $this->UpdateForm->reset()
         'required' => true
     ))
     ->addElement(array(
+        'id' => 'image',
+        'label' => __('LABEL_IMAGE'),
+        'type' => 'file',
+        'allowEmpty' => true,
+        'image' => true,
+    ))
+    ->addElement(array(
         'id' => 'description',
         'label' => __('LABEL_DESCRIPTION'),
     ))
@@ -83,7 +90,16 @@ $this->UpdateForm->reset()
 if ($this->request->is('post')) {
     // Trim data
     $data = $this->request->data();
+    if (!empty($_FILES['image']) && $_FILES['image']['error'] === 0) {
+        $filetype = $_FILES['image']['type'];
+        $filename = $_FILES['image']['name'];
+        $filedata = $_FILES['image']['tmp_name'];
+        $data['image'] = new CurlFile($filedata, $filetype, $filename);
+    }
     foreach ($data as $key => $value) {
+        if ($key == 'image') {
+            continue;
+        }
         $data[$key] = trim($value);
     }
     
@@ -91,10 +107,12 @@ if ($this->request->is('post')) {
     if ($form->validate($data)) {
         // Call API to Login
         $id = Api::call(Configure::read('API.url_products_addupdate'), $data);
+        $error = Api::getError();
         if (!empty($id) && !Api::getError()) {
             $this->Flash->success(__('MESSAGE_SAVE_OK'));
             return $this->redirect("/{$this->controller}/update/{$id}");
         } else {
+            print_r($error);die();
             return $this->Flash->error(__('MESSAGE_SAVE_NG'));
         }
     }
